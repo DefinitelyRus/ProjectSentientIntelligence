@@ -1,27 +1,16 @@
 # Project Cobalt Island
 Draft name: "Attrition"
 
-Attrition combinates elements from RTS, rogue-like, resource management, and survival genres to create
-a new thrilling experience of being unsure if making it out alive is possible. It borrows the pre-positioned
-randomized room contents from the game "SCP: Containment Breach" where there is a set of fixed hallway
-layouts but the individual rooms are always randomized on each run. It also borrows the item-hunting
-theme from "The Escapists" series where the player has to collect a certain set of items or complete
-a series of tasks in order to escape the prison in which they are locked up in.
+Attrition combinates elements from RTS, rogue-like, resource management, and survival genres to create a new thrilling experience of being unsure if making it out alive is possible. It borrows the pre-positioned randomized room contents from the game "SCP: Containment Breach" where there is a set of fixed hallway layouts but the individual rooms are always randomized on each run. It also borrows the item-hunting theme from "The Escapists" series where the player has to collect a certain set of items or complete a series of tasks in order to escape the prison in which they are locked up in.
 
-You and a squad of troopers find yourself at the rooftop of a medical research center, attempting to
-contact a nearby settlement to be rescued. You make contact with the survivors, but they seem unwilling
-to rescue you and your crew, concerning that their supplies are running low and that they have enough
-medical and security staff as it is--they do not need any more of your troopers nor you, a pharmacist.
-However, they seem willing to make an offer. You are on a medical research center, one that was nearly
-able to find a working cure if it weren't for the fact that it had been flooded by zombies.
+You and a squad of troopers find yourself at the rooftop of a medical research center, attempting to contact a nearby settlement to be rescued. You make contact with the survivors, but they seem unwilling to rescue you and your crew, concerning that their supplies are running low and that they have enough medical and security staff as it is--they do not need any more of your troopers nor you, a pharmacist. However, they seem willing to make an offer. You are on a medical research center, one that was nearly able to find a working cure if it weren't for the fact that it had been flooded by zombies.
 
-Your job is simple. Enter the laboratory, find the cure, finish it, test it, and then go back to the
-rooftop to get rescued. You only have 7 days before the power runs out.
+Your job is simple. Enter the laboratory, find the cure, finish it, test it, and then go back to the rooftop to get rescued. You only have 7 days before the power runs out.
 
 ## Basic Info
 Just stuff to mention so you can imagine what the game is supposed to look and feel like.
 - View: Top-down
-- Art style: Simplified Signalis but in HD 2D
+- Art style: Simplified Signalis but in HD 2D. No custom pixel art assets.
 - Control scheme: Tap to select character, then tap somewhere to move. That's it.
 - Intended difficulty: Similar to FTL (Hard but not frustrating)
 - What the player should feel: Tense, Focused

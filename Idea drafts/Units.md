@@ -56,5 +56,4 @@ Survivors can accumulate skill the longer they perform the same task.
 - The player does not gain any additional stats or abilities.
 
 ## Attacking
-When a zombie is in sight, survivors will stop using any panels they may currently be using and automatically
-attack the threat after a short delay. Once the threat has been eliminated, the surivor will go back to the cell they are stationed.
+When a zombie is in sight, survivors will stop using any panels they may currently be using and automatically attack the threat after a short delay. Once the threat has been eliminated, the surivor will go back to the cell they are stationed.
