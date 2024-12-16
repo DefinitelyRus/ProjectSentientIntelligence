@@ -1,9 +1,6 @@
 # Zombies
 Each day, the spawn director will be given a certain number of points. These points will be randomly distributed between number of zombies and total stats the zombies will have. Each zombie will then receive a random number of stat points until no more points are available. Each zombie will then semi-randomly assign points to stats.
 
-
-
-
 There are 3 kinds of zombies:
 ## Regular Zombie
 - Very easy to kill with any weapon.
