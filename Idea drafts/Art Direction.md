@@ -29,41 +29,44 @@ I have 2 styles in mind for the character, each resembling an existing character
 
 ### Referencing [Lacie](https://static.wikia.nocookie.net/paper-lily/images/c/c0/Screenshot_2023-11-10_at_12.49.37.png/revision/latest?cb=20231110115018) from Paper Lily
 I chose Lacie as a primary reference for her strong suitability as a chemistry researcher, both personality-wise and visually.
-- Waist-long straight-ish/wavy blonde hair.
-- Blue "Hunter"-shaped eyes.
+- Waist-long straight-ish/wavy blonde hair
+- Blue "Hunter"-shaped eyes
 - Calm, quiet, and somewhat timid look.
 - 5'2 tall <!-- This detail was never verified in any official material. I'm just going by assumption. -->
-- Small-medium chest. <!-- I cannot believe I have to specify this. -->
-- White coat.
-- Red scarf.\*
-- Black uniform under the coat.\*
-- Black ribbon as a headband.\*
-- Short black socks.
-- Brown shoes.\*
+- Small-medium chest <!-- I cannot believe I have to specify this. -->
+- White coat
+- Red scarf\*
+- Black uniform under the coat\*
+- Black ribbon as a headband\*
+- Short black socks
+- Brown shoes\*
 
 \*Details that need to be changed.
 
 ### Referencing [Kaho Honjou](https://cdn.donmai.us/sample/dc/0f/__honjou_kaho_and_shirasawa_akito_hajirau_kimi_ga_mitainda_drawn_by_uma_raclette__sample-dc0f2e99b961c942006ef5348390616f.jpg) from Hajirau Kimi ga Mitainda
 Like Lacie, her personality and looks both work for the character. However, her larger profile (both in height and *depth*) makes her a little more suited for the leadership role she'll be taking in the game, albeit at the cost of looking equally less fitting as a researcher.
 - Waist-long straight black hair. Sometimes tied at the back. (See linked image.)
-- Purple neutral-shaped eyes.
-- Calm, quiet, exceptionally timid look.
+- Purple neutral-shaped eyes
+- Calm, quiet, and exceptionally timid look.
 - 5'4 tall
-- Large chest. <!-- Same comment as before. -->
-- Black zip-up cat ears hoodie.\*
-- White polo.
-- Red necktie.\*
-- Black rectangular glasses.
-- Short pleated plaid skirt worn from waist to upper-mid thighs.\* <!-- Yes, I realize how detailed this part is in comparison. Shut up. -->
-- Black thigh-high socks.
-- Brown leather shoes.
+- Large chest <!-- Same comment as before. -->
+- Black zip-up cat ears hoodie\*
+- White polo
+- Red necktie\*
+- Black rectangular glasses
+- Short pleated plaid skirt worn from waist to upper-mid thighs\* <!-- Yes, I realize how detailed this part is in comparison. Shut up. -->
+- Black thigh-high socks
+- Brown leather shoes
 
 \*Details that need to be changed.
 
 ## Legionnaires
-Legionnaires are private military company personnel originally taking odd-job security work contracted by various anonymous entities.
+Legionnaires are private military company personnel originally taking odd-job security work contracted by various entities. They're often paired alongside National Guard personnel as the federal government will not allow military allocation beyond a certain threshold for non-government entities, even if its purpose and impact is extremely high for the nation's interest. Given their organization's relatively low asking price for a group of highly skilled combatants, they have become the go-to budget option for those with little need for armored vehicles and air superiority.
 
-They wear a standard set of military gear:
+---
+
+Their design borrows aspects from [Anarchists](https://counterstrike.fandom.com/wiki/Anarchist) from CS:GO and [Eous](https://zenless-zone-zero.fandom.com/wiki/Eous) from Zenless Zone Zero. Unlike the Anarchists, the Legionnaires do not have masks nor wear their hoods.
+
 - Black military helmet
 - Black armored vest/carrier
 - Black light rucksack (worn over the hoodie)
@@ -73,20 +76,51 @@ They wear a standard set of military gear:
 - Large orange scarf - It's worn over the hoodie styled somewhat similar to [boy scout scarves](https://retailobjects.scoutshop.org/media/wysiwyg/Scout_Scarf_Day.jpg), but covers the front instead of the back.
 
 ## Civilians
-Civilians wear various types of clothing, from typical work outfits to casual fashion. It's up to the artist's discretion to decide on the smaller details.
+Civilians wear various types of clothing, from typical work outfits to casual fashion. It's up to the artist's discretion to decide on the smaller details, taking into consideration the following details:
+
+
+- These civilians do not have any form of survival or combat training. Think of office workers, construction, writing, and other similarly-natured jobs.
+- Avoid clothing that require physics, such as skirts and long hair. Have some mercy on the animator(s).
+- Nothing exotic or unusual. Again, have mercy on the animator(s).
 
 ## Lost Survivors (Scientists)
+These are staff in the medical research facility the player is touring during the outbreak. None of them are related to the biochemisty sector.
 
+There's only really one requirement:
+- White Lab Coat
 
 ## Regular Zombies
-
+Regular zombies have no specific clothing. Their skin color is pale if light-skinned or reddened if dark-skinned. They are smeared with blood all over their face and clothing, usually from eating other survivors or as a result of the infection. They are bald, which is another side-effect of the disease.
 
 ## Mutated Zombies
+These zombies are enlarged versions of regular zombies with extremely soft muscle tissues with extraordinarily quick regenerative properties. This makes them practically immune to low caliber gunfire as any damage dealt will simply be regenerated, as well as high caliber rifles for overpenetrating the soft tissues.
 
+Since they have soft muscle tissues, their body more closely resemble a jelly-like substance while maintaining a humanoid shape. They're not "fat" in proportion, but instead has very loose and elastic skin, with enlarged heads and torso, while keeping the normal arm size.
+
+They do not have any top clothing; it was destroyed as part of their body enlargement.
 
 ## Armored Zombies
+Armored zombies come in three versions: National Guard, State Police, and Legionnaires.
+
+### National Guard
+- Army green helmet with mask
+- Army green combat fatigues (Shirt & cargo pants)
+- Army green vest
+- Dark brown leather boots
+
+### State Police
+- Black riot helmet w/ the visor down
+- Navy blue police uniform (Long sleeves & trousers)
+- Black vest
+- Black leather shoes
+
+### Legionnaires
+- See "Legionnaires" section.
+- They are wearing the scarf as a mask.
 
 # Weapons
+These will be detailed later.
+
 ## R1 Blaster
 
 
