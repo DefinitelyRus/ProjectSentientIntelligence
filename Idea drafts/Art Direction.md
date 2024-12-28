@@ -19,7 +19,7 @@ This made her a point of envy by her peers. She has rarely been bullied directly
 
 Despite this, she displays little confidence in her skills, except specifically when under immense danger. Given her already-soft-spoken personality, this made her seem timid to others, further giving her peers a sense of envy for what looks to them as a shy girl with no balls<!-- both figuratively and literally-->.
 
-On the day of the outbreak, she visited the nation's top medical research facility along with a few other students. It's a heavily guarded facility with a mix of National Guard and Legionnaires. They were invited inside to have a tour through their facilities and showcases, and to see who among the students can be scouted for early recruitment.
+A month before the outbreak, she visited the nation's top medical research facility along with a few other students. It's a heavily guarded facility with a mix of National Guard and Legionnaires. They were invited inside to have a tour through their facilities and showcases, and to see who among the students can be scouted for early recruitment.
 
 Nearing the end of the tour at Sector I1, a level 5 alert rang throughout the entire facility and all gates were closed shortly after. Meanwhile, the player and 7 other survivors tried finding the fire exit but to no avail, all they found is the rooftop access. They climbed the stairs to the rooftop and found a squad of Legionnaires guarding the perimeter, one of which is talking to someone by the small radio tower. A few minutes later, the game begins.
 

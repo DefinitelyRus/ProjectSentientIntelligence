@@ -9,7 +9,7 @@ Your job is simple. Enter the laboratory, find the cure, finish it, test it, and
 
 ## Basic Info
 Just stuff to mention so you can imagine what the game is supposed to look and feel like.
-- View: Top-down
+- View: Isometric Top-down, 30-45 deg off on Y-axis
 - Art style: Simplified Signalis but in HD 2D. No custom pixel art assets.
 - Control scheme: Tap to select character, then tap somewhere to move. That's it.
 - Intended difficulty: Similar to FTL (Hard but not frustrating)
