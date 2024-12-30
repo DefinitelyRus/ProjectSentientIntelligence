@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl2eor6ldxbo1"
-path="res://.godot/imported/Lab Horror.png-1d3ff2cb044754b2f8963b9d7e34977d.ctex"
+uid="uid://v8xcwmdgfq2d"
+path="res://.godot/imported/Idle.png-9f0cb47236e38f5930761ae87bb68889.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tilesets/Experimental/Lab Horror.png"
-dest_files=["res://.godot/imported/Lab Horror.png-1d3ff2cb044754b2f8963b9d7e34977d.ctex"]
+source_file="res://Sprites/Experimental/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-9f0cb47236e38f5930761ae87bb68889.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

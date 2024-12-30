@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csutnbg8nwoag"
-path="res://.godot/imported/Bonus Map.png-b7dc150692f2e8cbed3053a4aa81c847.ctex"
+uid="uid://bl2eor6ldxbo1"
+path="res://.godot/imported/Lab Horror.png-a335f9372187eb1457b12335b49ccae0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tilesets/Experimental/Bonus Map.png"
-dest_files=["res://.godot/imported/Bonus Map.png-b7dc150692f2e8cbed3053a4aa81c847.ctex"]
+source_file="res://Sprites/Experimental/Lab Horror.png"
+dest_files=["res://.godot/imported/Lab Horror.png-a335f9372187eb1457b12335b49ccae0.ctex"]
 
 [params]
 
