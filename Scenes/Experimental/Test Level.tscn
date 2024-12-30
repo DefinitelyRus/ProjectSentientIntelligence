@@ -1,5 +1,18 @@
-[gd_scene format=3 uid="uid://beaoe1v477tg7"]
+[gd_scene load_steps=3 format=3 uid="uid://beaoe1v477tg7"]
 
-[node name="Level" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://csutnbg8nwoag" path="res://Sprites/Experimental/Bonus Map.png" id="1_48ker"]
+[ext_resource type="PackedScene" uid="uid://c27ra6g73gv3c" path="res://Scenes/Experimental/Player.tscn" id="1_ap30y"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Test Level" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ap30y")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+projection = 1
+size = 20.0
+
+[node name="Level Sprite" type="Sprite3D" parent="."]
+texture_filter = 0
+texture = ExtResource("1_48ker")

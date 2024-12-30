@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c27ra6g73gv3c"]
+
+[ext_resource type="Script" path="res://Scripts/Experimental/CharacterMovement.cs" id="1_ejuvn"]
+[ext_resource type="Texture2D" uid="uid://v8xcwmdgfq2d" path="res://Sprites/Experimental/Idle.png" id="1_ifgqn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y4h4k"]
+
+[node name="Character Body" type="CharacterBody3D"]
+script = ExtResource("1_ejuvn")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_y4h4k")
+
+[node name="Sprite" type="Sprite3D" parent="."]
+texture_filter = 0
+texture = ExtResource("1_ifgqn")
+region_enabled = true
+region_rect = Rect2(19, 20, 12, 23)
