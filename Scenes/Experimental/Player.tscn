@@ -1,14 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://c27ra6g73gv3c"]
 
-[ext_resource type="Script" path="res://Scripts/Experimental/CharacterMovement.cs" id="1_ejuvn"]
+[ext_resource type="Script" path="res://Scripts/Object-specific/CharacterMovement.cs" id="1_ejuvn"]
 [ext_resource type="Texture2D" uid="uid://v8xcwmdgfq2d" path="res://Sprites/Experimental/Idle.png" id="1_ifgqn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y4h4k"]
+size = Vector3(0.12, 0.06, 1)
 
-[node name="Character Body" type="CharacterBody3D"]
+[node name="Character Body" type="CharacterBody3D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_ejuvn")
+collider = NodePath("Collider")
+sprite = NodePath("Sprite")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.085, 0)
 shape = SubResource("BoxShape3D_y4h4k")
 
 [node name="Sprite" type="Sprite3D" parent="."]

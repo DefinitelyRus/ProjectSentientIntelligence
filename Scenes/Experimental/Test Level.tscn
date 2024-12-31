@@ -1,18 +1,59 @@
-[gd_scene load_steps=3 format=3 uid="uid://beaoe1v477tg7"]
+[gd_scene load_steps=8 format=3 uid="uid://beaoe1v477tg7"]
 
 [ext_resource type="Texture2D" uid="uid://csutnbg8nwoag" path="res://Sprites/Experimental/Bonus Map.png" id="1_48ker"]
-[ext_resource type="PackedScene" uid="uid://c27ra6g73gv3c" path="res://Scenes/Experimental/Player.tscn" id="1_ap30y"]
+[ext_resource type="Script" path="res://Scripts/Object-specific/CharacterMovement.cs" id="2_edqi5"]
+[ext_resource type="Texture2D" uid="uid://bl2eor6ldxbo1" path="res://Sprites/Experimental/Lab Horror.png" id="3_8slgl"]
+[ext_resource type="Texture2D" uid="uid://v8xcwmdgfq2d" path="res://Sprites/Experimental/Idle.png" id="3_muy7d"]
+[ext_resource type="Script" path="res://Scripts/Experimental/StaticObject.cs" id="4_5k4w6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o2bxn"]
+size = Vector3(0.475, 0.2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_peilw"]
+size = Vector3(0.625, 0.26, 1)
 
 [node name="Test Level" type="Node3D"]
 
-[node name="Player" parent="." instance=ExtResource("1_ap30y")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 1)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
 projection = 1
-size = 20.0
+size = 10.0
 
 [node name="Level Sprite" type="Sprite3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -20)
 texture_filter = 0
 texture = ExtResource("1_48ker")
+
+[node name="Player CharacterBody" type="CharacterBody3D" parent="." node_paths=PackedStringArray("collider", "sprite")]
+script = ExtResource("2_edqi5")
+ControlOverride = true
+collider = NodePath("Collider")
+sprite = NodePath("Sprite")
+
+[node name="Collider" type="CollisionShape3D" parent="Player CharacterBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.360997, 0)
+shape = SubResource("BoxShape3D_o2bxn")
+
+[node name="Sprite" type="Sprite3D" parent="Player CharacterBody"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("3_muy7d")
+region_enabled = true
+region_rect = Rect2(19, 20, 12, 23)
+
+[node name="Obstacle StaticBody3D" type="StaticBody3D" parent="." node_paths=PackedStringArray("collider", "sprite")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+script = ExtResource("4_5k4w6")
+collider = NodePath("Collider")
+sprite = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite3D" parent="Obstacle StaticBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0.55)
+texture_filter = 0
+texture = ExtResource("3_8slgl")
+region_enabled = true
+region_rect = Rect2(297, 29, 31, 67)
+
+[node name="Collider" type="CollisionShape3D" parent="Obstacle StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.545, 0)
+shape = SubResource("BoxShape3D_peilw")
