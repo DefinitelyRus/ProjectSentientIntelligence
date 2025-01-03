@@ -44,13 +44,13 @@ public partial class CharacterObject : CharacterBody3D
 	/// </summary>
 	[ExportGroup("Physics")]
 	[Export(PropertyHint.Range, "0,100,0.1")]
-	public float WalkingSpeed = 3.5f;
+	public float WalkingSpeed = 1f;
 
 	/// <summary>
 	/// How quickly the character moves when running.
 	/// </summary>
 	[Export(PropertyHint.Range, "0,100,0.1")]
-	public float RunningSpeed = 5.0f;
+	public float RunningSpeed = 3f;
 
 	/// <summary>
 	/// How quickly the character will reach its target speed.
