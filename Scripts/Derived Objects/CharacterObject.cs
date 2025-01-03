@@ -1,7 +1,6 @@
 using Godot;
-using System;
 
-public partial class CharacterMovement : CharacterBody3D
+public partial class CharacterObject : CharacterBody3D
 {
 	/// <summary>
 	/// Points at which direction the player should be moving towards.
@@ -92,14 +91,7 @@ public partial class CharacterMovement : CharacterBody3D
 		if (Direction != Vector3.Zero) {
 			targetSpeed = WalkingSpeed; //TODO: Allow running speed.
 			Velocity = Velocity.MoveToward(Direction.Normalized() * targetSpeed * StatusMultiplier, Acceleration * (float) delta);
-
-			GD.Print(
-				$"CharacterBody YZ:    {GlobalPosition.Y:F2} {GlobalPosition.Z:F2}\n" +
-				$"Sprite3D YZ:         {sprite.GlobalPosition.Y:F2} {sprite.GlobalPosition.Z:F2}\n" +
-				$"CollisionShape3D YZ: {collider.GlobalPosition.Y:F2} {collider.GlobalPosition.Z:F2}"
-			);
 		}
-
 
 		//Otherwise, decelerate to a stop.
 		else Velocity = Velocity.MoveToward(Vector3.Zero, Friction * (float) delta);
