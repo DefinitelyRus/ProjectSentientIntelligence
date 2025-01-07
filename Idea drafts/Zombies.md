@@ -51,83 +51,115 @@ These are stat boosts that will be applied to zombies as the game progresses.
 
 ## Spawning Rules
 - Zombies cannot spawn in the following rooms regardless of occupation:
-    - Any lost survivor-occupied rooms.
+    - Any lost-survivor-occupied rooms.
     - The stairwell to the rooftop.
-    - Laboratory
+- Zombies cannot spawn in rooms recently (past 24 hours) visited by a survivor unless specified otherwise.
+
+
+## Navigation Rules
+### Macro
+- Zombies will not always pick the shortest path to Sector J1. They will be evenly distributed across different possible paths to spread out the volume of zombies attacking at once.
+- Zombies will stay in the room they spawned in until the rest period, at which point, a random selection of rooms will have some of the zombies inside be transferred to an adjacent room.
+- Whenever a gate outside of Sector J1 is opened, Ruleset B will immediately be active on that sector.
+
+### Micro
+- When a survivor enters a room, zombies will stay still for some time before attacking the survivor. This gives the survivor some time to clear some space.
+- When attacking a survivor, zombies will not always take the shortest path. They may opt to try to flank the survivor, exit the room and wait by the doorway, or (if a path is available) go around the survivor by exiting the room and entering back in from behind the survivor. This presents interesting behavior for the player to deal with.
+
+## Rulesets
+These are premade rule sets that dictate how zombies will behave on the macro scale to present interesting gameplay for the player.
+
+Rulesets are made active when certain conditions are met, after some time has passed, or when a survivor (likely the player) performs a certain action.
+
+### Ruleset A
+Zombies will spawn but will not navigate to Sector J1. This lets the player have some breathing room to strategize and manage their resources for a while.
+
+- Regular zombies will spawn somewhat evenly across the entire facility.
+- Non-regular zombies will only spawn within pre-selected rooms unless the room has been recently visited by a survivor.
+- Zombies will only navigate towards the survivors if they're in the same room or in a room immediately adjacent to it.
+
+### Ruleset B
+Zombies will not spawn and a random selection will navigate to Sector J1. It's a standard onslaught of zombies that's meant to serve as the default state.
+
+- No zombies will spawn.
+- Zombies within a random selection of rooms will rush towards Sector J1.
+
+### Ruleset C
+Only non-regular zombies will spawn and a random selection of any kind of zombie will navigate to Sector J1. This is meant to present an interesting scenario where the player has to suddenly deal with 8 armored zombies in a room, or perhaps have to defend against 20 mutated zombies simply out of bad luck.
+
+- Total zombie spawn count is reduced.
+- Regular zombies will not spawn.
+- Non-regular zombies will spawn in a random selection of rooms.
+- Zombies within a random selection of rooms will rush towards Sector J1.
+
+### Ruleset D
+Only regular zombies will spawn and a random selection of any kind of zombie will navigate to Sector J1. This compliments Ruleset C as it forces the player to deal with sheer numbers instead of tougher armored or mutated zombies.
+
+- Total zombie spawn count is increased.
+- Regular zombies will spawn somewhat evenly across the entire facility.
+- Non-regular zombies will not spawn.
+- Zombies within a random selection of rooms will rush towards Sector J1.
+
+### Ruleset E
+No zombies will spawn and no zombies will navigate towards Sector J1. This is to give the player some breathing room and allow the player to explore freely without much worry about the other survivors.
+
+- No zombies will spawn.
+- All zombies will stay.
+
+### Ruleset F
+No zombies will spawn and all remaining zombies will navigate towards Sector J1. This is meant to pressure the player to make a move and escape. While no additional zombies were spawned, this increased volume of zombies attacking at once is nearly impossible to handle and thus cannot be ignored.
+
+- No zombies will spawn.
+- Some zombies will navigate via vents, entering from behind the gate.
+- All zombies will navigate towards Sector J1.
 
 ## Day 1
-Ruleset A: Zombies will spawn somewhat evenly across the entire facility and no additional zombies will spawn. Some rooms will have a semi-fixed set of zombies that are guaranteed to spawn, while most others will spawn anywhere from 0 to 10 zombies each. Mutated and armored zombies will only spawn in certain rooms at the start of the game.
-
-300 total zombies will spawn.
+Rulesets: A, B
 
 ## Day 2
-Ruleset B: A number of zombies will spawn throughout the next 24 in-game hours. Of this number, only about 3/4ths will attempt to navigate towards the nearest unit. Zombies will only spawn from 5 randomly-selected rooms that no unit has occupied for any duration in the past 2 days. Non-regular zombies will either spawn alongside regular zombies *or* only with the same type of zombies.
-
-200 total zombies will spawn.
+Rulesets: A, B, D
 
 ## Day 3
-No changes in the spawn ruleset.
-
-400 total zombies will spawn.
+Rulesets: A, C, D, E
 
 ## Day 4
-No changes in the spawn ruleset.
-
-800 total zombies will spawn.
+Rulesets: A, B, E
 
 ## Day 5
-Ruleset C: 50% of zombies will spawn as non-regular zombies. However, the total number of zombies to spawn is also (probably) smaller than usual. No changes in other behaviors from ruleset B.
-
-200 total zombies will spawn.
+Rulesets: A, B, C, D, E
 
 ## Day 6
-Swap back to Ruleset B.
-
-1600 total zombies will spawn.
+Rulesets: B, C, D, E
 
 ## Day 7
-No changes in the spawn ruleset.
-
-2400 total zombies will spawn.
+Rulesets: E, F
 
 ## Day 8
-Ruleset D: 100% of zombies are regular zombies. However, the total number of zombies to spawn will increased significantly.
+Rulesets: E
 
-6400 total zombies will spawn.
-By this point, the units should have limited visibility and no access to the command panel.
+Starting Day 8, all reserve power is out. Lights are completely off and the control panel is inaccessible. No zombies will spawn nor navigate towards Sector J1, so the player should spend this time to clear the area and find supplies to last another day.
 
 ## Day 9
-Swap back to Ruleset B.
-
-2800 total zombies will spawn.
+Rulesets: A, B
 
 ## Day 10
-Ruleset E: Exactly the same as ruleset B. However, no zombies will attempt to navigate towards any units.
-
-2400 total zombies will spawn.
+Rulesets: C, D, E
 
 ## Day 11
-Swap back to ruleset B.
-
-1600 total zombies will spawn.
+Rulesets: B, E
 
 ## Day 12
-No changes in the spawn ruleset.
-
-1200 total zombies will spawn.
+Rulesets: B, E
 
 ## Day 13
-Swap back to ruleset C.
-
-300 total zombies will spawn.
+Rulesets: B, E
 
 ## Day 14
-Ruleset F: No zombies will spawn. Instead, all existing zombies will attempt to navigate towards the nearest unit.
+Rulesets: F
 
-0 total zombies will spawn.
+A non-stop onslaught of zombies. This is meant to be extremely difficult
 
 ## Day 15
-No changes in the spawn ruleset.
+Rulesets: E
 
-0 total zombies will spawn.
 If the player is somehow still alive by this day, the fire exit will be breached open where the player can escape.

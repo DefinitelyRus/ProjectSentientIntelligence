@@ -3,9 +3,55 @@ Draft name: "Attrition"
 
 Attrition combinates elements from RTS, rogue-like, resource management, and survival genres to create a new thrilling experience of being unsure if making it out alive is possible. It borrows the pre-positioned randomized room contents from the game "SCP: Containment Breach" where there is a set of fixed hallway layouts but the individual rooms are always randomized on each run. It also borrows the item-hunting theme from "The Escapists" series where the player has to collect a certain set of items or complete a series of tasks in order to escape the prison in which they are locked up in.
 
-You and a squad of troopers find yourself at the rooftop of a medical research center, attempting to contact a nearby settlement to be rescued. You make contact with the survivors, but they seem unwilling to rescue you and your crew, concerning that their supplies are running low and that they have enough medical and security staff as it is--they do not need any more of your troopers nor you, a pharmacist. However, they seem willing to make an offer. You are on a medical research center, one that was nearly able to find a working cure if it weren't for the fact that it had been flooded by zombies.
+## Intro story
 
-Your job is simple. Enter the laboratory, find the cure, finish it, test it, and then go back to the rooftop to get rescued. You only have 7 days before the power runs out.
+"2 months pass since the outbreak began. Luckily, I found myself some 50 other survivors in the city port. Not so luckily, we're running critically low on supplies. The colony scouts found one radio tower beaming red lights at night and they suggested that it's our only way out given the supply constraints. A last ditch effort was made to reach the facility, and we've already lost nearly half our number just exiting the port, and another 9 by the time we entered the facility. Strangely, the power in the facility looked intentionally powered off, save for some critical components like fire exit lights and our target, the radio tower. We had no time to find the generators and power them on, so we just booked it to the rooftop. We lost another 5 people in the process.
+
+Now we're at the rooftop, with no food and low on ammo. Good thing no one's injured. Well, at least the ones still alive. The squad of soldiers that came with us lost 4 of theirs, including their leader, and they seem lost now that no one's in command. 7 of them are holding off the zombies from just below the staircase, and the one with me here is going through all the frequencies on the radio to see if a single one would pick up. Nothing but static. He told me to keep trying while he goes back and help defend. I tried going off his list of known frequencies and after some stroke of good luck, I got someone."
+
+Player: "Is there anyone on this frequency?"
+
+Goldfish: "... Affirmative. This is callsign Goldfish, 1st Intelligence Company, how copy?"
+
+Player: "I- I hear you! Look, we're at the rooftop of some medical research center. The building with this tall radio tower and a helipad next to it? Can you come pick us up? Please. We've lost over two-thirds of our group trying to get here, we're low on ammo and have no food left; you're our only way out."
+
+Goldfish: "How many souls?"
+
+Player: "16, I think."
+
+Goldfish: "Copy. I'll get back to you in a moment."
+
+Player: "..."
+
+Goldfish: "..."
+
+Player: "How's the situation downstairs?"
+
+Civilian: "Looks like it's clearing up a bit! We can try getting to the fire exit if we really have to!"
+
+Goldfish: "Miss radio tower, are you there?"
+
+Player: "I'm here."
+
+Goldfish: "Here's the situation: we can't pick you up. You'll have to find another way out. I can give you guidance on how to do that, but we can't spend any more resources than we absolutely have to. That's of course unless you have something valuable enough for us to consider. Boss' words, not mine."
+
+Player: "What?! Ugh... I should've dropped out of pharmacy long ago... Alright. Can you at least tell me how we can get out of here?"
+
+Goldfish: "You're a pharmacist, you say? Miss radio, do you know exactly where you are right now?"
+
+Player: "I just told you though? Some medical research center wit-"
+
+Goldfish: "No, no. That's rhetorical. You're on a biochemical weapon research lab hidden in plain sight. It's likely, no, probable that you'll find some form of cure there, or at least the blueprint to make one yourself. If you can make one and prove that it works, boss is likely willing to let you in. I know it's a big ask but this might just be your only chance."
+
+Player: "... Got it."
+
+Goldfish: "I'll be waiting here on the radio. Don't stay in there for too long; the power grid's in shambles, so whatever's powering that radio is gonna die out soon. And if I don't hear from you in 15 days, I'll just assume you've joined 'em, you hear?"
+
+Player: "Roger. This is 'Miss Radio Tower', getting off this net, time now. Out."
+
+Goldfish: "Impressive! Out."
+
+<!-- This radio exchange is supposedly between a civilian and professional military. As you may notice, it's not very formal. That's because Goldfish picks up on the fact that he's talking with a civilian and adjusts his language appropriately. Player later surprises Goldfish by properly ending the exchange, as a callback to her pre-military training. -->
 
 ## Basic Info
 Just stuff to mention so you can imagine what the game is supposed to look and feel like.
@@ -14,7 +60,7 @@ Just stuff to mention so you can imagine what the game is supposed to look and f
 - Control scheme: Tap to select character, then tap somewhere to move. That's it.
 - Intended difficulty: Similar to FTL (Hard but not frustrating)
 - What the player should feel: Tense, Focused
-
+- Vibe: "We've lost over two-thirds of our group trying to get here, we're low on ammo and have no food left. However, I'm a pharmacist on a biochemical research facility. I can make a cure."
 
 # Objectives
 1. Enter the medical research center laboratory.
@@ -22,7 +68,7 @@ Just stuff to mention so you can imagine what the game is supposed to look and f
     - Optional: Secure an adequately sized perimeter that extends to the rooftop.
 2. Find the experimental cure.
     - Find the formula drafts.
-    - Find the experiemental cure vials.
+    - Find the experimental cure vials.
     - Find the chemistry lab.
 3. Follow and iterate on the formula drafts.
     - Find the necessary ingredients (see formula drafts for a short list of possible formulas).
@@ -36,10 +82,33 @@ Just stuff to mention so you can imagine what the game is supposed to look and f
 
 
 
+# Gameplay
+The game mixes roguelike, real-time strategy, and resource management into one game, and each of which is highlighted depending on where the your character is and when it's happening.
+
+## Command phase
+When your character enters the control room and operates the control panel, the game implicitly enters the command phase, highlighting the game's RTS elements. You can control all units from anywhere on the map, either on the macro (full map) or micro (per-room) scale.
+
+On the micro scale, your job is to ensure your units are dynamically assigned to the appropriate panels, defensive positions, and distributing resources to the right units.
+
+On the macro scale, you're given an overall view of the situation across the entire facility, giving you a chance to evaluate your next move.
+
+The purpose of this phase is to give you a way to have overall control of how resources flow in your group. It forces you to strategize and ensure that all survivors are supplied well, are placed in advantageous positions, and given appropriate tasks. If done well, the survivors can self-sustain for some time without your inputs until a new situation is presented. If done poorly, survivors will run out of food and ammo, or worse, have your defensive positions overrun.
+
+## Explore phase
+When your character exits the control room, and more crucially, leaves sector J1, the game implicitly enters the explore phase, highlighting the game's roguelike elements. Since you're no longer in the control room, you'll naturally enter the micro view.
+
+The purpose of this phase is to give you a reason to get out of your designated safe area and take risks. In order for the survivors to escape, they'll need to explore the facility to find everything they need to create the cure. And more crucially, they need to explore to find food and ammo. In theory, you could complete this simply by controling your units around and look for all the necessary things while you're up in your ivory tower safe and sound. You can't do that here. You must go out there and find the power generator for each sector you wish to gain control over, which means you too must explore. Additionally, there are things only your character can do, especially in regards with your objectives.
+
+## Management phase
+This phase highlights the game's resource management elements. It can happen anywhere and anytime, but mostly in sector J1.
+
+The purpose of this phase is to force the player to make hard decisions. In this facility, resources are limited and you'll have to fight tooth and nail just to find enough resources to last another day. Sometimes, a stroke of bad luck or a chain of poor decisions happen, and not enough food was found to feed everyone for the day. Or perhaps there simply isn't enough ammo for everyone, or not enough effective weapons to fight the horde. You're forced to make decisions and these decisions dictate if you and your fellow survivors survive.
 
 
 
-
+- Only Sector J1 is powered on by default. All other sectors are not powered and thus cannot be viewed via the control panel. Their generators found in each sector must first be enabled and powered on before it can be controlled remotely via the control panel. This ensures that you don't just stay in the control room all day and not interfacing with the explore phase of the game.
+- Combatants will start with Blau EDCs. Replacement weapons can be found outside of Sector J1, spread across the facility.
+- Only the player has a tier 4 access card, which is required to access certain rooms and the panels in it, such as the control room and the laboratory.
 
 
 
