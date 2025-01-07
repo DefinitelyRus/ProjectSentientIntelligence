@@ -4,18 +4,18 @@ There are 100 rooms in the facility. Each room's location is ranomized every ses
 Undiscovered rooms will spawn anywhere from 0-10 zombies. Discovered rooms with no survivors inside will serve as spawn points for zombies, 2 days after it was last visited.
 
 ### Panels
-Some rooms contain panels. When a character interacts with a panel, a product is produced or an action is taken. When a panel has stopped being used, the character will step off the panel and move to the nearest vacant tile. All NPCs can use any panel except for the command panel. If a unit is operating a panel, they can stop operating said panel if the player requests or another unit can take over.
+Some rooms contain panels. When a character interacts with a panel, a product is produced or an action is taken. When a panel has stopped being used, the character will step off the panel and move to the nearest vacant tile. All NPCs can use any panel except for the control panel. If a unit is operating a panel, they can stop operating said panel if the player requests or another unit can take over.
 
-## Command Room
-This is the surveillance room repurposed as a central command.
+## Control Room
+This is the surveillance room repurposed as a central control.
 
-### Command Panel
-When using the command panel, you can view cameras from all over the facility.
+### Control Panel
+When using the control panel, you can view cameras from all over the facility.
 
 ## Weapons Panel
 This is where weapons are upgraded and ammo are produced. It has to be supplied with scrap and operated by a survivor in order to upgrade weapons and ammo. Weapons panels can be found in certain rooms where defensive fortifications are set up before your arrival. Any additional units inside the room will automatically distribute the supplies to troopers or caches.
 
-In order to use this panel, the panel operator must be given commands. They will not make anything unless instructed specifically, and they will not stop making that thing and consuming scrap unless instructed otherwise.
+In order to use this panel, the panel operator must be given controls. They will not make anything unless instructed specifically, and they will not stop making that thing and consuming scrap unless instructed otherwise.
 
 ## Clinic
 This is where injured survivors can be medical treatment. Being the only room with comfortable beds, this is also where survivors can rest.
