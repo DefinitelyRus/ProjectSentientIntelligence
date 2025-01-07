@@ -30,8 +30,6 @@ script = ExtResource("2_edqi5")
 ControlOverride = true
 collider = NodePath("Collider")
 sprite = NodePath("Sprite")
-WalkingSpeed = 1.0
-RunningSpeed = 3.0
 
 [node name="Sprite" type="Sprite3D" parent="Player CharacterBody"]
 pixel_size = 0.02

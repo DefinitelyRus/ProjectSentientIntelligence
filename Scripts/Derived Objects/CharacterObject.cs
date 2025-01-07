@@ -16,8 +16,7 @@ public partial class CharacterObject : CharacterBody3D
 	/// <summary>
 	/// Allows character controls to be overridden with manual inputs.
 	/// </summary>
-	[ExportGroup("Flags")]
-	[Export] public bool ControlOverride = false;
+	[ExportGroup("Flags")]	[Export] public bool ControlOverride = false;
 
 	/// <summary>
 	/// Allows the sprite layering to be overridden, making the character's sprite always appear at the top-most layer.
