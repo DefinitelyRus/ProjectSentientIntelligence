@@ -1,31 +1,60 @@
 # Weapons
-Weapons shoot zombies. Cool. Some weapons can also be upgraded at a weapons panel up to 5 times.
+Weapons shoot zombies. Cool.
 
-All weapons here are designed to have a specific purpose in mind. Their capacities, assuming it's limited in the first place, is adequate for a minimum of 4 in-game hours and upwards of 9 in-game hours after upgrades. This means that combatants will have to be supplied additional ammo 2-4 times a day.
+All weapons here are designed to have a specific purpose in mind.
+
+For weapons where reloading/recharging is required, survivors will only reload or recharge their weapons when ammo/charge has ran out or if there are no more targets in sight.
+
+Unless specified, survivors will always target the zombie closest to them.
+
+# Tier 1 Weapons
+These serve as starter weapons that everyone spawns with at random, or can easily be found littered around the facility. They're meant to be used only to clear out an area and begin searching for better weapons, as well as self-defense for survivors not in the front lines.
+
+Unless specified, these weapons cannot be upgraded.
 
 ## R1 Blaster
-Except for the player, all survivors spawn with this pistol. It does not consume ammo and cannot be upgraded. However, it can only fire a limited number of shots before needing to be recharged by hand.
+An illegally modified airsoft gun. It has an enlarged tank and a hand crank for increasing the tank pressure. With how many pellets can fit in a small bag, survivors can practically carry a nearly infinite number of pellets.
 
-Its operator cannot shoot until there is enough air pressure in the tank. By default, they will not operate any panels until this pistol has been fully charged.
+### Info
+- Spawns with: Civilian survivors
+- Infinite ammo.
+- Needs recharge.
+- Cannot be upgraded.
 
 ### Base stats
 - Fires 1 pellet per shot.
-- Fires once every 1 second.
-- 50hp damage per pellet.
-- 10 pellet capacity.
-- 3-second recharge per pellet.
+- Fires 10 pellets every 1 second.
+- 8hp damage per shot.
+- -1hp damage for every -10 pellets in air pressure.
+- 70 pellet capacity in air pressure.
+- 1-second recharge per 10-pellet in air pressure.
 
-## X99 小町 (Komachi)
-Only the player spawns with this weapon and it cannot be upgraded.
+## Blau EDC
+A simple pistol that consumes standard ammo. Not the best nor the worst; just enough to keep its user safe at times of emergency.
 
-While equipped, the weapon will target up to 3 zombies within sight and fire a 3-round burst after a 1 second lock-on delay. If the closest zombie is armored or mutated, all 3 shots will be targeted on that zombie until it is killed. The player can fire up to 5 bursts with no need for resupply. However, each burst fired requires 4 seconds to recharge.
+### Info
+- Spawns with: Scientist survivors
+- Cannot be upgraded.
 
 ### Base stats
-- Fires 3 shots per burst.
-- Fires once every 1 second.
-- 100hp damage per shot.
-- 4-second recharge per burst.
-- 15 shot capacity.
+- Fires 1 shot every 0.4 seconds.
+- 35hp damage per shot.
+- 300 round capacity.
+
+## Royale Vicere
+A hunting rifle that consumes standard ammo. Requires a high level of skill to operate quickly and accurately. It is otherwise extremely well-built and reliable, that it's considered the end-game for those in the market for hunting rifles.
+
+### Info
+- Found in: Weapon crates
+
+### Base stats
+<!-- Unfinished -->
+
+
+# Tier 2 Weapons
+Tier 2 weapons are necessary to survive later zombie onslaughts. They can be found littered all across the facility and ammo for them can be found and made easily.
+
+Unless specified, tier 2 weapons can be upgraded up to 3 times.
 
 ## K69 Vindicator
 A typical shotgun. This will deal heavy damage against mutated zombies, but minimal damage against armored zombies.
@@ -69,3 +98,37 @@ A low-caliber automatic sub-machine gun. This bursts heavy damage against regula
 - Fires +5 shots every 1 second.
 - +2hp damage per shot.
 - +600 round capacity.
+
+
+
+# Tier 3 Weapons
+Extremely potent weapons for the most dangerous of jobs. Ammo can be difficult to come by and even more difficult to make.
+
+Unless specified, tier 3 weapons can be upgraded up to 3 times.
+
+## Alpha Mechatronics AMX99 小町 (Komachi)
+An experimental superpowered taser meant as an alternative to carbines for room clearing. It's great against anything with flesh, especially those doused in conductive liquid (e.g. contaminated water, blood).
+
+The weapon will target up to 9 zombies within sight and fire an energy burst after a minimum 1 second lock-on delay.
+
+If a zombie is armored or mutated and the weapon has been upgraded at least once, 2 less zombies will be targeted and 3x the damage will be dealt to the special zombie. The player can fire up to 5 bursts with no need for resupply. However, each burst fired requires at least 3 seconds to recharge.
+
+### Base stats
+- Each shot damages 1 target in a chain.
+- Damages 1 target per burst.
+- Can fire 1 burst every 1 second.
+- 100hp damage per shot and ignores all armor.
+- 3-second recharge per burst. Does not recharge until completely depleted or no targets are acquired.
+- 5 burst capacity.
+
+### Per-level upgrades
+- x3 targets hit per burst.
+- +1 second lock-on delay.
+- +1 second recharge.
+- -1 burst capacity.
+
+## 
+(Some SERE Pistol derivative)
+
+## 47
+It's an AK47.
