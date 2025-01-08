@@ -1,7 +1,6 @@
 # Project Cobalt Island
-Draft name: "Attrition"
 
-Attrition combinates elements from RTS, rogue-like, resource management, and survival genres to create a new thrilling experience of being unsure if making it out alive is possible. It borrows the pre-positioned randomized room contents from the game "SCP: Containment Breach" where there is a set of fixed hallway layouts but the individual rooms are always randomized on each run. It also borrows the item-hunting theme from "The Escapists" series where the player has to collect a certain set of items or complete a series of tasks in order to escape the prison in which they are locked up in.
+Project Cobalt Island combines elements from RTS, rogue-like, resource management, and survival genres to create a new thrilling experience of being unsure if making it out alive is possible. It borrows the partially-prodecurally-generated rooms from the game "SCP: Containment Breach" where there is a set of fixed hallway layouts but the individual rooms are always randomized on each run. It also borrows the item-hunting theme from "The Escapists" series where the player has to collect a certain set of items or complete a series of tasks in order to escape the prison in which they are locked up in.
 
 ## Intro story
 
@@ -105,18 +104,118 @@ This phase highlights the game's resource management elements. It can happen any
 The purpose of this phase is to force the player to make hard decisions. In this facility, resources are limited and you'll have to fight tooth and nail just to find enough resources to last another day. Sometimes, a stroke of bad luck or a chain of poor decisions happen, and not enough food was found to feed everyone for the day. Or perhaps there simply isn't enough ammo for everyone, or not enough effective weapons to fight the horde. You're forced to make decisions and these decisions dictate if you and your fellow survivors survive.
 
 
+# **Ideal Game Flow for *Project Cobalt Island***
+By ChatGPT
 
-- Only Sector J1 is powered on by default. All other sectors are not powered and thus cannot be viewed via the control panel. Their generators found in each sector must first be enabled and powered on before it can be controlled remotely via the control panel. This ensures that you don't just stay in the control room all day and not interfacing with the explore phase of the game.
-- Combatants will start with Blau EDCs. Replacement weapons can be found outside of Sector J1, spread across the facility.
-- Only the player has a tier 4 access card, which is required to access certain rooms and the panels in it, such as the control room and the laboratory.
+A player-driven pace dictated by energy reserves, strategic exploration across sectors, and a focus on resource efficiency over micromanagement.
+
+## **1. Opening Phase: Rooftop Beginnings**  
+- **Narrative Setup:** The survivors are huddled on the rooftop, exhausted and disoriented. The radio conversation with *Goldfish* sets the stakes and overarching goal: create and verify a cure to secure extraction.  
+- **Gameplay Focus:**  
+   - Learn basic controls (tap-to-move, select units).  
+   - Secure immediate surroundings (clear threats, gather initial supplies).  
+   - Introduce the control panel and its energy management system.  
+- **Key Objectives:**  
+   - Power up Sector J1 (default active).  
+   - Explore the immediate area for supplies and basic weapons.  
+- **Tension Driver:** Limited initial supplies and the looming energy countdown.  
+- **Outcome:** Establish a base of operations in Sector J1, preparing to expand.  
+
+
+## **2. Command Phase: Power and Strategy**  
+- **Narrative Setup:** With the control room secured, the player gains access to the facility’s energy grid and basic monitoring systems.  
+- **Gameplay Focus:**  
+   - Allocate energy reserves to specific systems (e.g., security doors, lights, or surveillance cameras).  
+   - Strategize which sectors to power up next based on objectives and available energy.  
+   - Assign survivors to tasks (guarding, scavenging, repairing systems).  
+- **Key Objectives:**  
+   - Decide which sector to prioritize (e.g., chemistry lab in K2, supply caches in J2).  
+   - Plan expeditions to enable generators in unpowered sectors.  
+- **Tension Driver:** Every energy expenditure is final, with no way to replenish reserves.  
+- **Outcome:** A clear strategic plan for sector exploration is established.  
+
+
+## **3. Explore Phase: Dangerous Expeditions**  
+- **Narrative Setup:** The player ventures into dark, hostile, and procedurally-generated rooms to secure critical objectives.  
+- **Gameplay Focus:**  
+   - Activate sector generators to enable remote control from the control panel.  
+   - Search for essential items: ingredients for the cure, weapons, and additional supplies.  
+   - Solve environmental challenges (e.g., locked doors requiring tier 4 access, traps, or blocked paths).  
+   - Combat encounters with zombies and possibly mutated threats.  
+- **Key Objectives:**  
+   - Locate and power key sectors: chemistry lab (K2), storage (J2, L1), and research archives (L3).  
+   - Collect cure formula drafts and necessary ingredients.  
+- **Tension Driver:** Exploration drains energy, consumes supplies, and puts survivors at risk.  
+- **Outcome:** The player gathers critical resources and gains control over powered sectors.  
+
+
+## **4. Management Phase: Hard Decisions**  
+- **Narrative Setup:** After returning from expeditions, the player evaluates the state of their survivors, supplies, and energy reserves.  
+- **Gameplay Focus:**  
+   - Distribute collected weapons and ammunition.  
+   - Decide which systems stay powered (e.g., lights in key corridors vs. cameras).  
+   - Prepare survivors for the next expedition.  
+- **Key Objectives:**  
+   - Ensure key sectors remain operational for upcoming objectives.  
+   - Optimize remaining resources for maximum efficiency.  
+- **Tension Driver:** Energy reserves dwindle, and mismanagement could lock out essential systems.  
+- **Outcome:** Survivors are rearmed, plans are adjusted, and preparations are made for the next push.  
+
+
+## **5. The Cure Phase: Science and Consequences**  
+- **Narrative Setup:** With formula drafts and ingredients secured, the player begins synthesizing the experimental cure in the chemistry lab.  
+- **Gameplay Focus:**  
+   - Follow formula instructions carefully.  
+   - Test iterations on isolated samples or controlled environments.  
+   - Handle potential disasters from failed attempts (e.g., hostile mutations).  
+- **Key Objectives:**  
+   - Successfully create and verify a functional cure.  
+   - Communicate findings to *Goldfish*.  
+- **Tension Driver:** Limited ingredients mean few chances to fail. Any mistake could mean restarting the search.  
+- **Outcome:** The cure is created, unlocking the final objective.  
+
+
+## **6. The Rooftop Defense: The Final Stand**  
+- **Narrative Setup:** Extraction is promised, but the survivors must hold out against an overwhelming final assault.  
+- **Gameplay Focus:**  
+   - Allocate survivors to defensive positions.  
+   - Ensure remaining energy is spent wisely (e.g., locking down critical choke points, powering lights).  
+   - Fight off waves of increasingly dangerous threats.  
+- **Key Objectives:**  
+   - Survive until extraction arrives.  
+   - Ensure at least five survivors remain alive.  
+- **Tension Driver:** Energy is nearly depleted, supplies are scarce, and the horde is relentless.  
+- **Outcome:** Extraction arrives, and the player must make a final choice.  
+
+
+## **7. Epilogue: The Final Choice**  
+- **Narrative Setup:** With the rescue helicopter waiting, the player must decide who gets to board.  
+- **Gameplay Focus:**  
+   - Choose four survivors to accompany the player.  
+   - Decide whether the player sacrifices themselves for someone else.  
+- **Key Objectives:**  
+   - Ensure the cure is secured.  
+   - Reflect on sacrifices made throughout the run.  
+- **Tension Driver:** Emotional weight of leaving survivors behind.  
+- **Outcome:**  
+   - **Best Ending:** The cure is delivered, and survivors escape.  
+   - **Bittersweet Ending:** Some survivors escape, but others didn’t make it.  
+   - **Bad Ending:** Extraction fails due to a critical mistake or insufficient survivors.  
+
+
+### **Key Adjustments to Fit the Vision:**  
+1. **Energy Management as the Core Timer:** Every decision costs energy, giving players full agency over pacing.  
+2. **Exploration is Mandatory:** Generators must be activated in each sector to progress.  
+3. **Simplified Management:** No morale, medical supplies, or fortifications—focus remains on energy, positioning, and resource allocation.  
+4. **Narrative Weight:** The story stays grounded with clear stakes and emotional decisions at key points.  
+5. **Survivor Focus:** Survivors act more as assets and resources, removing unnecessary complexity while maintaining emotional weight.  
+
+This refined game flow keeps the player constantly engaged, balancing calculated decisions, risky exploration, and tense final moments—all within a tight 50–80 minute experience.
 
 
 
 
-
-
-
-# ChatGPT Suggestions lol
+# (old) ChatGPT Suggestions lol
 Your idea, *Attrition*, has excellent potential to offer a unique gaming experience. Here's a breakdown of its strengths and areas for enhancement:
 
 ### **Strengths:**
