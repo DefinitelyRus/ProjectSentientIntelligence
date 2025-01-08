@@ -53,7 +53,10 @@ These are stat boosts that will be applied to zombies as the game progresses.
 - Zombies cannot spawn in the following rooms regardless of occupation:
     - Any lost-survivor-occupied rooms.
     - The stairwell to the rooftop.
-- Zombies cannot spawn in rooms recently (past 24 hours) visited by a survivor unless specified otherwise.
+- Zombies cannot spawn in rooms recently (past 48 hours) visited by a survivor unless specified otherwise.
+- Technical: Zombies are spawned in a suspended state. They will not be instantiated into a node.
+- Technical: Suspended zombies will be instantiated when the room they're in or the room immediately adjacent to it has been loaded, or if the room was selected to attack Sector J1.
+- Technical: Suspended zombies still count towards the total zombie count in macro view.
 
 
 ## Navigation Rules
