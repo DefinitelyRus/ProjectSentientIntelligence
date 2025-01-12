@@ -2,65 +2,61 @@
 
 [ext_resource type="Texture2D" uid="uid://csutnbg8nwoag" path="res://Sprites/Experimental/Bonus Map.png" id="1_48ker"]
 [ext_resource type="Script" path="res://Scripts/Derived Objects/CharacterObject.cs" id="2_edqi5"]
-[ext_resource type="Texture2D" uid="uid://bl2eor6ldxbo1" path="res://Sprites/Experimental/Lab Horror.png" id="3_8slgl"]
+[ext_resource type="Script" path="res://Scripts/Derived Objects/ColliderObject.cs" id="3_ad5hq"]
 [ext_resource type="Texture2D" uid="uid://v8xcwmdgfq2d" path="res://Sprites/Experimental/Idle.png" id="3_muy7d"]
-[ext_resource type="Script" path="res://Scripts/Derived Objects/StaticObject.cs" id="4_5k4w6"]
-[ext_resource type="Script" path="res://Scripts/Derived Objects/ColliderObject.cs" id="4_ade85"]
+[ext_resource type="Texture2D" uid="uid://bl2eor6ldxbo1" path="res://Sprites/Experimental/Lab Horror.png" id="4_h7h4l"]
+[ext_resource type="Script" path="res://Scripts/Derived Objects/StaticObject.cs" id="4_owfqi"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_o2bxn"]
-size = Vector3(0.24, 0.120625, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2fly"]
+size = Vector2(48, 25)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_peilw"]
-size = Vector3(0.31, 0.126016, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gph72"]
+size = Vector2(34, 12.5)
 
-[node name="Test Level" type="Node3D"]
+[node name="Test Level" type="Node2D"]
 
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
-projection = 1
-size = 10.0
-
-[node name="Level Sprite" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
-texture_filter = 0
+[node name="Level Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_48ker")
 
-[node name="Player CharacterBody" type="CharacterBody3D" parent="." node_paths=PackedStringArray("collider", "sprite")]
+[node name="Player CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Sprite", "Collider")]
 script = ExtResource("2_edqi5")
 ControlOverride = true
-collider = NodePath("Collider")
-sprite = NodePath("Sprite")
+Sprite = NodePath("Sprite2D")
+Collider = NodePath("CollisionShape2D")
+WalkingSpeed = 250.0
+Friction = 1800.0
 
-[node name="Sprite" type="Sprite3D" parent="Player CharacterBody"]
-pixel_size = 0.02
-texture_filter = 0
+[node name="Sprite2D" type="Sprite2D" parent="Player CharacterBody2D"]
+scale = Vector2(4, 4)
 texture = ExtResource("3_muy7d")
 region_enabled = true
 region_rect = Rect2(19, 20, 12, 23)
 
-[node name="Collider" type="CollisionShape3D" parent="Player CharacterBody" node_paths=PackedStringArray("sprite", "collider")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.169687, 0)
-shape = SubResource("BoxShape3D_o2bxn")
-script = ExtResource("4_ade85")
-sprite = NodePath("../Sprite")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player CharacterBody2D" node_paths=PackedStringArray("sprite", "collider")]
+position = Vector2(0, 33.5)
+shape = SubResource("RectangleShape2D_a2fly")
+script = ExtResource("3_ad5hq")
+sprite = NodePath("../Sprite2D")
 collider = NodePath(".")
 
-[node name="Obstacle StaticBody3D" type="StaticBody3D" parent="." node_paths=PackedStringArray("Sprite", "Collider")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
-script = ExtResource("4_5k4w6")
-Sprite = NodePath("Sprite")
-Collider = NodePath("Collider")
+[node name="Obstruction StaticBody2D" type="StaticBody2D" parent="." node_paths=PackedStringArray("Sprite", "Collider")]
+y_sort_enabled = true
+position = Vector2(-100, 100)
+script = ExtResource("4_owfqi")
+Sprite = NodePath("Sprite2D")
+Collider = NodePath("CollisionShape2D")
 
-[node name="Sprite" type="Sprite3D" parent="Obstacle StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.55)
-texture_filter = 0
-texture = ExtResource("3_8slgl")
+[node name="Sprite2D" type="Sprite2D" parent="Obstruction StaticBody2D"]
+texture = ExtResource("4_h7h4l")
 region_enabled = true
-region_rect = Rect2(297, 29, 31, 67)
+region_rect = Rect2(439, 28, 34, 67)
 
-[node name="Collider" type="CollisionShape3D" parent="Obstacle StaticBody3D" node_paths=PackedStringArray("sprite", "collider")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.271992, 0)
-shape = SubResource("BoxShape3D_peilw")
-script = ExtResource("4_ade85")
-sprite = NodePath("../Sprite")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstruction StaticBody2D" node_paths=PackedStringArray("sprite", "collider")]
+position = Vector2(0, 27.25)
+shape = SubResource("RectangleShape2D_gph72")
+script = ExtResource("3_ad5hq")
+sprite = NodePath("../Sprite2D")
 collider = NodePath(".")
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(0.6, 0.6)

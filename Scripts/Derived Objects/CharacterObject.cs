@@ -1,11 +1,11 @@
 using Godot;
 
-public partial class CharacterObject : CharacterBody3D
+public partial class CharacterObject : CharacterBody2D
 {
 	/// <summary>
 	/// Points at which direction the player should be moving towards.
 	/// </summary>
-	private Vector3 Direction = Vector3.Zero;
+	private Vector2 Direction = Vector2.Zero;
 
 	/// <summary>
 	/// The internal target speed to accelerate towards.
@@ -13,55 +13,67 @@ public partial class CharacterObject : CharacterBody3D
 	/// </summary>
 	private float targetSpeed = 0f;
 
+	#region Debug Flags
+
 	/// <summary>
 	/// Allows character controls to be overridden with manual inputs.
 	/// </summary>
-	[ExportGroup("Flags")]	[Export] public bool ControlOverride = false;
+	[ExportGroup("Debug Flags")]
+	[Export] public bool ControlOverride = false;
 
 	/// <summary>
 	/// Allows the sprite layering to be overridden, making the character's sprite always appear at the top-most layer.
 	/// </summary>
 	[Export] public bool AlwaysOnTop = false;
 
-	[Export(PropertyHint.Range, "0,45,0.5")]
-	public float SpriteLayerDepth = 45f;
+	#endregion
 
-	/// <summary>
-	/// This character's collider node.
-	/// Used to change the parent node's Z position relative to its Y position.
-	/// </summary>
-	[ExportGroup("Nodes")]
-	[Export] public CollisionShape3D collider;
+	#region Nodes
 
 	/// <summary>
 	/// This character's sprite.
 	/// </summary>
-	[Export] public Sprite3D sprite;
+	[ExportGroup("Nodes")]
+	[Export] public Sprite2D Sprite;
+
+	/// <summary>
+	/// This character's collider.
+	/// </summary>
+	[Export] public CollisionShape2D Collider;
+
+	#endregion
+
+	#region Movement
+
+	/// <summary>
+	/// Whether the character is running or not.
+	/// </summary>
+	[ExportGroup("Movement")]
+	[Export] public bool IsRunning = false;
 
 	/// <summary>
 	/// How quickly the character moves when walking.
 	/// </summary>
-	[ExportGroup("Physics")]
-	[Export(PropertyHint.Range, "0,100,0.1")]
-	public float WalkingSpeed = 1f;
+	[Export(PropertyHint.Range, "0,1000,10")]
+	public float WalkingSpeed = 200f;
 
 	/// <summary>
 	/// How quickly the character moves when running.
 	/// </summary>
-	[Export(PropertyHint.Range, "0,100,0.1")]
-	public float RunningSpeed = 3f;
+	[Export(PropertyHint.Range, "0,1000,10")]
+	public float RunningSpeed = 500f;
 
 	/// <summary>
 	/// How quickly the character will reach its target speed.
 	/// </summary>
-	[Export(PropertyHint.Range, "0,100,0.1")]
-	public float Acceleration = 20f;
+	[Export(PropertyHint.Range, "0,10000,100")]
+	public float Acceleration = 1000f;
 
 	/// <summary>
 	/// How quickly the character will slow to a halt.
 	/// </summary>
-	[Export(PropertyHint.Range, "0,100,0.1")]
-	public float Friction = 30f;
+	[Export(PropertyHint.Range, "0,10000,100")]
+	public float Friction = 1000f;
 
 	/// <summary>
 	/// A multiplier to the target speed.
@@ -75,30 +87,40 @@ public partial class CharacterObject : CharacterBody3D
 	[Export(PropertyHint.Range, "0, 10, 0.05")]
 	public float StatusMultiplier = 1f;
 
+	#endregion
+
 	public override void _PhysicsProcess(double delta) {
 
 		//Character direction heading can be overridden.
 		if (ControlOverride) {
-			Direction = Vector3.Zero;
-			if (Input.IsActionPressed("ui_up")) Direction += Vector3.Up;
-			if (Input.IsActionPressed("ui_down")) Direction += Vector3.Down;
-			if (Input.IsActionPressed("ui_left")) Direction += Vector3.Left;
-			if (Input.IsActionPressed("ui_right")) Direction += Vector3.Right;
+			Direction = Vector2.Zero;
+			if (Input.IsActionPressed("ui_up")) Direction += Vector2.Up;
+			if (Input.IsActionPressed("ui_down")) Direction += Vector2.Down;
+			if (Input.IsActionPressed("ui_left")) Direction += Vector2.Left;
+			if (Input.IsActionPressed("ui_right")) Direction += Vector2.Right;
 		}
 
+		//Sets the target speed to the appropriate value.
+		targetSpeed = IsRunning ? RunningSpeed : WalkingSpeed;
+
 		//Accelerate to the target speed if the Direction is non-zero.
-		if (Direction != Vector3.Zero) {
-			targetSpeed = WalkingSpeed; //TODO: Allow running speed.
+		if (Direction != Vector2.Zero) {
 			Velocity = Velocity.MoveToward(Direction.Normalized() * targetSpeed * StatusMultiplier, Acceleration * (float) delta);
 		}
 
-		//Otherwise, decelerate to a stop.
-		else Velocity = Velocity.MoveToward(Vector3.Zero, Friction * (float) delta);
-		
-		//Apply the Velocity value to the CharacterBody3D Node.
-		MoveAndSlide();
+		//Otherwise, slow down to a halt indepenently on each axis.
+		if (Mathf.Abs(Direction.X) == 0) Velocity = Velocity.MoveToward(new Vector2(0, Velocity.Y), Friction * (float) delta);
+		if (Mathf.Abs(Direction.Y) == 0) Velocity = Velocity.MoveToward(new Vector2(Velocity.X, 0), Friction * (float) delta);
 
-		//Updates the character's Z position to negatively match the Y position, allowing for natural sprite layering.
-		if (Velocity != Vector3.Zero) sprite.GlobalPosition = new Vector3(sprite.GlobalPosition.X, sprite.GlobalPosition.Y, AlwaysOnTop ? SpriteLayerDepth : -collider.GlobalPosition.Y);
+		//Apply the Velocity value to the CharacterBody2D Node.
+		MoveAndSlide();
+	}
+
+	public override void _Process(double delta) {
+		//The sprite's Z-index will be updated to match the collider's Y position.
+		Sprite.ZIndex = (int) Collider.GlobalPosition.Y;
+		GD.Print($"[CharacterObject] Updated sprite's Z-index {Sprite.ZIndex} matching the collider's Y-pos={Collider.GlobalPosition.Y:F0}.");
+
+		GD.Print("[CharacterObject] Velocity: " + Velocity);
 	}
 }
