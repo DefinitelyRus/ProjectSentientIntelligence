@@ -1,29 +1,65 @@
 # Art Direction
 This document describes the design direction for different game elements.
 
-# General Instructions
-- **Remember the theme (mid-apocalyptic).** All characters are dressed the way they were when the outbreak began, so anything goes.
-- **Do *not* go overboard with details.** This is not a typical gacha game. Keep it simple, but also make it unique and memorable.
+## General Instructions
+- **Remember the theme (future dystopian).** Like in **Zenless Zone Zero**, characters come in groups of at least 3, and they all have a consistent style while remaining distinguished and unique. These characters often work well together both in looks and in gameplay.
+- **Do *not* go overboard with details.** Don't tire yourself out. Only add details that will be noticeable when the character is 0.5 inch tall on your device.
 - **Keep designs consistent.** The player should not be able to make an assumption that the characters were designed by multiple different artists. Small details like body proportions, line thickness, color palette, shading styles, and so on, should all be consistent across all character designs.
-- **No cutesy characters.** As much as I want a twin-tailed little si- *ehrm...* characters in the game, the game's theme must take priority. It's bleak and the desperation to stay alive is constant; there is no room for soft and cute characters here.
 
-# Characters
+## Characters
 This section states my vision for how the characters should be designed. Since it may affect how the characters will look, additional non-visual details about the characters have also been included.
 
-## Player Character
-The player (currently unnamed) is a 21-year-old female college student studying pharmaceutical research, with the belief that she'll be the one to find the cure for her mother's rare disease.
+### Backpack
+<img src="https://i.redd.it/klxdxrix7mx31.jpg" height="360px"/>
 
-She has taken part in ROTC and leadership positions before entering college and have received invitations to join the National Guard as an Officer which she promptly rejected. She has also received multiple awards for excellent marksmanship, leadership, and advanced knowledge in biochemistry.
+**All playable characters wear a large "backpack" like in [Astroneer](https://astroneer.fandom.com/wiki/Backpack).** Unlike Astroneer, the items do not need to be displayed externally, but it should bear the same bulkiness and rigidity. It also has some glowing LEDs for added effect, like the blue oxygen tank at the top.
 
-This made her a point of envy by her peers. She has rarely been bullied directly as a result of her performance, but her peers would often make her feel isolated despite her prior attempts to enjoy a normal social life. She has since resorted to living a "lone wolf" lifestyle while still maintaining her excellent leadership skills for those dreaded mandatory group projects.
 
-Despite this, she displays little confidence in her skills, except specifically when under immense danger. Given her already-soft-spoken personality, this made her seem timid to others, further giving her peers a sense of envy for what looks to them as a shy girl with no balls<!-- both figuratively and literally-->.
+### Nuke
+<img src="https://teamfortressnerd.wordpress.com/wp-content/uploads/2014/04/still_playing_tf2_02.jpg" height="360px"/>
 
-A month before the outbreak, she visited the nation's top medical research facility along with a few other students. It's a heavily guarded facility with a mix of National Guard and Legionnaires. They were invited inside to have a tour through their facilities and showcases, and to see who among the students can be scouted for early recruitment.
+Note that they'll be carrying a nuke as well, attached to their backpack. It should look somewhat like the bomb the robots carry in TF2's Mann vs Machine. Don't worry about the weight. Let's just say they've developed some super light materials by this point.
 
-Nearing the end of the tour at Sector I1, a level 5 alert rang throughout the entire facility and all gates were closed shortly after. Meanwhile, the player and 7 other survivors tried finding the fire exit but to no avail, all they found is the rooftop access. They climbed the stairs to the rooftop and found a squad of Legionnaires guarding the perimeter, one of which is talking to someone by the small radio tower. A few minutes later, the game begins.
+
+### Weapons
+**Everyone's weapons are energy-based.** None of them use traditional guns, rockets, missiles, or even magic. If it can't be generated with just electricity, it won't belong here. This means that most of their weapons will be themed around lasers, teslas, light, sound, etc. anything that doesn't need ammo.
+
+
+&nbsp;
 
 ---
+&nbsp;
+
+*The character design ideas begin past this point.*
+
+&nbsp;
+
+# Molt
+Reference design: [Stark from Sousou no Frieren](https://frieren.fandom.com/wiki/Stark)
+
+Faction: 600 Underground
+
+*You decide how he's gonna look.*
+
+## Weapon: M-TIC (Multi-target Infrared Cannon)
+The M-TIC is a medium class directed energy weapon. It behaves like a [Multi-Target Inferno Tower in Clash of Clans](https://clashofclans.fandom.com/wiki/Inferno_Tower). It deals a stream of low-damage beams to the 5 closest enemies.
+
+### Alternate Fire Mode: RIIC (Ramp-up Intensity Infrared Cannon)
+When an **Alternate Fire Module** is active, the M-TIC switches to RIIC.
+
+Instead of targeting multiple enemies at once and dealing small streams of damage, it behaves indentically to a **Single-Target Inferno Tower**. It can only target one enemy at once. When a target is locked onto, damage starts weak (similar to 1 stream of M-TIC) then ramps up in damage after every few seconds, up to 2 times.
+
+## Modules
+### Alternate Fire Module
+Swaps to the carried weapon's alternate fire mode in exchange for additional power consumption.
+
+### 2 Unoccupied Slots
+*The player may add more modules here during gameplay.*
+
+
+<!--
+---
+
 
 I have 2 styles in mind for the character, each resembling an existing character from another fictional media.
 
@@ -32,8 +68,8 @@ I chose Lacie as a primary reference for her strong suitability as a chemistry r
 - Waist-long straight-ish/wavy blonde hair
 - Blue "Hunter"-shaped eyes
 - Calm, quiet, and somewhat timid look.
-- 5'2 tall <!-- This detail was never verified in any official material. I'm just going by assumption. -->
-- Small-medium chest <!-- I cannot believe I have to specify this. -->
+- 5'2 tall
+- Small-medium chest
 - White coat
 - Red scarf\*
 - Black uniform under the coat\*
@@ -49,12 +85,12 @@ Like Lacie, her personality and looks both work for the character. However, her 
 - Purple neutral-shaped eyes
 - Calm, quiet, and exceptionally timid look.
 - 5'4 tall
-- Large chest <!-- Same comment as before. -->
+- Large chest
 - Black zip-up cat ears hoodie\*
 - White polo
 - Red necktie\*
 - Black rectangular glasses
-- Short pleated plaid skirt worn from waist to upper-mid thighs\* <!-- Yes, I realize how detailed this part is in comparison. Shut up. -->
+- Short pleated plaid skirt worn from waist to upper-mid thighs\*
 - Black thigh-high socks
 - Brown leather shoes
 
@@ -136,3 +172,4 @@ These will be detailed later.
 ## C6 Zeus
 
 # World
+-->
