@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu2xey67q7q03"]
+
+[ext_resource type="Script" path="res://Scripts/Miscellaneous/PersistentNodeTester.cs" id="1_p60g5"]
+
+[node name="Persistent Node Tester" type="Node"]
+script = ExtResource("1_p60g5")

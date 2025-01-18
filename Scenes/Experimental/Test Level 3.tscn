@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0elp1g1k07mk"]
+
+[ext_resource type="Script" path="res://Scripts/Experimental/LevelManager.cs" id="1_dnn6d"]
+[ext_resource type="Script" path="res://Scripts/Derived Objects/StaticObject.cs" id="1_gskmw"]
+[ext_resource type="Texture2D" uid="uid://bl2eor6ldxbo1" path="res://Sprites/Experimental/Lab Horror.png" id="2_8onqk"]
+[ext_resource type="Script" path="res://Scripts/Tools/ColliderObject.cs" id="3_o5nqj"]
+[ext_resource type="Texture2D" uid="uid://csutnbg8nwoag" path="res://Sprites/Experimental/Bonus Map.png" id="4_7vlt4"]
+[ext_resource type="PackedScene" uid="uid://bgbhteel27gkj" path="res://Scenes/Objects/Dynamic/Character Template.tscn" id="6_762la"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_joeak"]
+size = Vector2(34, 12.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d5bvb"]
+
+[node name="Game Manager" type="Node"]
+
+[node name="Session Manager" type="Node" parent="."]
+
+[node name="Level Manager" type="Node" parent="Session Manager"]
+script = ExtResource("1_dnn6d")
+
+[node name="Obstruction StaticBody2D" type="StaticBody2D" parent="Session Manager/Level Manager" node_paths=PackedStringArray("Sprite", "Collider")]
+y_sort_enabled = true
+position = Vector2(100, -100)
+script = ExtResource("1_gskmw")
+Sprite = NodePath("Sprite2D")
+Collider = NodePath("CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Session Manager/Level Manager/Obstruction StaticBody2D"]
+texture = ExtResource("2_8onqk")
+region_enabled = true
+region_rect = Rect2(439, 28, 34, 67)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Session Manager/Level Manager/Obstruction StaticBody2D" node_paths=PackedStringArray("sprite", "collider")]
+position = Vector2(0, 27.25)
+shape = SubResource("RectangleShape2D_joeak")
+script = ExtResource("3_o5nqj")
+sprite = NodePath("../Sprite2D")
+collider = NodePath(".")
+
+[node name="Level Sprite" type="Sprite2D" parent="Session Manager/Level Manager"]
+z_index = -4096
+texture = ExtResource("4_7vlt4")
+
+[node name="Unit Manager" type="Node" parent="Session Manager"]
+
+[node name="Playable Character" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
+ControlOverride = true
+CharacterName = "Player"
+
+[node name="Dummy Character" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
+position = Vector2(-150, 100)
+CharacterName = "Dummy"
+
+[node name="Camera Manager" type="Node2D" parent="."]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Camera Manager"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+
+[node name="Collider" type="CollisionShape2D" parent="Camera Manager/RigidBody2D"]
+editor_description = "This collider isn't actually needed for our purposes, but Godot requires it for all PhysicsBody objects.
+
+Using a RigidBody may be outright unnecessary if the Camera itself already supports movement moothing and shake physics."
+shape = SubResource("CircleShape2D_d5bvb")
+disabled = true
+
+[node name="Camera2D" type="Camera2D" parent="Camera Manager/RigidBody2D"]

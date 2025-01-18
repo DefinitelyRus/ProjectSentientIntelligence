@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ecumxxxrs5en"]
+
+[ext_resource type="Script" path="res://Scripts/Experimental/LevelManager.cs" id="1_nveyi"]
+
+[node name="TestLevel2" type="Node2D"]
+script = ExtResource("1_nveyi")
