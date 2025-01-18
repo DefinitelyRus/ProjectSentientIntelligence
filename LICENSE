@@ -1,48 +1,40 @@
-# **OSDG Source-Available License v1.0**
+OSDG Source-Available License v1.0.1
 
-## **1. Ownership and Rights**  
-This software, including all source code, assets, and related documentation (hereinafter referred to as “Software”), is the exclusive intellectual property of Okay Squad Developer Group (hereinafter referred to as the “Owner”). All rights not explicitly granted in this license are reserved by the Owner.
+1. Ownership and Rights  
+This software, including all source code, assets, and related documentation (hereinafter referred to as “Software”), is the exclusive intellectual property of Okay Squad Developer Group (hereinafter referred to as the “Owner”). All rights not explicitly granted in this license are reserved by the Owner.  
 
-
-## **2. Permitted Uses**  
+2. Permitted Uses  
 Subject to compliance with this license, you are granted a non-exclusive, non-transferable, revocable license to:  
 - View and inspect the source code.  
 - Modify the source code for personal, non-commercial use only.  
 - Run the Software for personal purposes.  
 
-
-## **3. Prohibited Uses**  
+3. Prohibited Uses  
 You are explicitly prohibited from:  
 - Redistributing, sublicensing, or sharing the Software, in original or modified form, publicly or privately.  
 - Commercializing the Software or any derivative work based on it.  
 - Reverse-engineering the Software for purposes other than personal education or improvement.  
 - Removing, altering, or obscuring any copyright, trademark, or proprietary notices from the Software.  
 
-If you wish to use the Software outside of these terms, you **must obtain explicit written permission** from the Owner.
+If you wish to use the Software outside of these terms, you must obtain explicit written permission from the Owner.  
 
+4. Contributions  
+Any contributions made to the Software (e.g., pull requests, bug fixes, feature additions) are considered to be the intellectual property of the Owner, unless explicitly agreed otherwise in writing.  
 
-## 4. Contributions
-Any contributions made to the Software (e.g., pull requests, bug fixes, feature additions) are considered to be the intellectual property of the Owner, unless explicitly agreed otherwise in writing.
+5. No Warranty  
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE OWNER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  
 
-
-## **5. No Warranty**  
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE OWNER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-## 6. Termination
+6. Termination  
 This license is effective until terminated. The Owner may terminate this license at any time if you fail to comply with its terms. Upon termination:  
 - You must immediately cease using the Software.  
 - You must delete all copies of the Software in your possession, including modified versions.  
 
+7. Governing Law  
+This license shall be governed by and interpreted in accordance with the laws of the Philippines, without regard to its conflict of law provisions.  
 
-## 7. Governing Law
-This license shall be governed by and interpreted in accordance with the laws of the Philippines, without regard to its conflict of law provisions.
+8. Acceptance of Terms  
+By accessing, using, or modifying this Software, you acknowledge that you have read, understood, and agreed to the terms of this license.  
 
+Copyright © 2024 Okay Squad Developer Group. All Rights Reserved.  
 
-## 8. Acceptance of Terms
-By accessing, using, or modifying this Software, you acknowledge that you have read, understood, and agreed to the terms of this license.
-
-
-**Copyright © 2024 Okay Squad Developer Group. All Rights Reserved.**
-
-If you have any questions regarding this license or require additional permissions, please contact: **definitelyrus@gmail.com**  
+If you have any questions regarding this license or require additional permissions, please contact: definitelyrus@gmail.com  
