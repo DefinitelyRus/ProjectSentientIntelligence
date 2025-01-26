@@ -3,11 +3,6 @@ using Godot;
 public partial class CharacterTemplate : CharacterBody2D
 {
 	/// <summary>
-	/// Points at which direction the player should be moving towards.
-	/// </summary>
-	private Vector2 MoveDirection = Vector2.Zero;
-	
-	/// <summary>
 	/// The 8 basic cardinal directions where characters can face towards.
 	/// </summary>
 	public enum CardinalDirection { N, NE, E, SE, S, SW, W, NW }
@@ -16,12 +11,6 @@ public partial class CharacterTemplate : CharacterBody2D
 	/// Controls where the character should be facing.
 	/// </summary>
 	public CardinalDirection FaceDirection { get; private set; }
-
-	/// <summary>
-	/// The internal target speed to accelerate towards.
-	/// This value is overridden by <see cref="WalkingSpeed"/> and <see cref="RunningSpeed"/> when the <see cref="MoveDirection"/> is non-zero.
-	/// </summary>
-	private float targetSpeed = 0f;
 
 	#region Debug Flags
 
@@ -77,6 +66,18 @@ public partial class CharacterTemplate : CharacterBody2D
 	/// Whether the character is running or not.
 	/// </summary>
 	[ExportGroup("Movement")]
+
+	/// <summary>
+	/// Points at which direction the player should be moving towards.
+	/// </summary>
+	private Vector2 MoveDirection = Vector2.Zero;
+
+	/// <summary>
+	/// The internal target speed to accelerate towards.
+	/// This value is overridden by <see cref="WalkingSpeed"/> and <see cref="RunningSpeed"/> when the <see cref="MoveDirection"/> is non-zero.
+	/// </summary>
+	private float targetSpeed = 0f;
+
 	[Export] public bool IsRunning = false;
 
 	/// <summary>
