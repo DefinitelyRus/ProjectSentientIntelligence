@@ -179,7 +179,11 @@ public partial class CharacterTemplate : CharacterBody2D
 		#endregion
 	}
 
-	public void Kill() {
+	public virtual void Affect() {
+		Kill();
+	}
+
+	public virtual void Kill() {
 		// Code for character death goes here.
 
 		QueueFree();

@@ -47,6 +47,12 @@ move_right={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Characters"
+2d_physics/layer_2="Walls"
+2d_physics/layer_32="Ignored"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

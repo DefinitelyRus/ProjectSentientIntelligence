@@ -19,19 +19,40 @@ size = Vector2(34, 12.5)
 [node name="Level Manager" type="Node" parent="Session Manager"]
 script = ExtResource("1_dnn6d")
 
-[node name="Obstruction StaticBody2D" type="StaticBody2D" parent="Session Manager/Level Manager" node_paths=PackedStringArray("Sprite", "Collider")]
+[node name="Obstruction 1 StaticBody2D" type="StaticBody2D" parent="Session Manager/Level Manager" node_paths=PackedStringArray("Sprite", "Collider")]
 y_sort_enabled = true
 position = Vector2(100, -100)
+collision_layer = 2
 script = ExtResource("1_gskmw")
 Sprite = NodePath("Sprite2D")
 Collider = NodePath("CollisionShape2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="Session Manager/Level Manager/Obstruction StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Session Manager/Level Manager/Obstruction 1 StaticBody2D"]
 texture = ExtResource("2_8onqk")
 region_enabled = true
 region_rect = Rect2(439, 28, 34, 67)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Session Manager/Level Manager/Obstruction StaticBody2D" node_paths=PackedStringArray("sprite", "collider")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Session Manager/Level Manager/Obstruction 1 StaticBody2D" node_paths=PackedStringArray("sprite", "collider")]
+position = Vector2(0, 27.25)
+shape = SubResource("RectangleShape2D_joeak")
+script = ExtResource("3_o5nqj")
+sprite = NodePath("../Sprite2D")
+collider = NodePath(".")
+
+[node name="Obstruction 2 StaticBody2D" type="StaticBody2D" parent="Session Manager/Level Manager" node_paths=PackedStringArray("Sprite", "Collider")]
+y_sort_enabled = true
+position = Vector2(50, 100)
+collision_layer = 2
+script = ExtResource("1_gskmw")
+Sprite = NodePath("Sprite2D")
+Collider = NodePath("CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Session Manager/Level Manager/Obstruction 2 StaticBody2D"]
+texture = ExtResource("2_8onqk")
+region_enabled = true
+region_rect = Rect2(439, 28, 34, 67)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Session Manager/Level Manager/Obstruction 2 StaticBody2D" node_paths=PackedStringArray("sprite", "collider")]
 position = Vector2(0, 27.25)
 shape = SubResource("RectangleShape2D_joeak")
 script = ExtResource("3_o5nqj")
@@ -46,15 +67,23 @@ texture = ExtResource("4_7vlt4")
 
 [node name="Playable Character" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
 ControlOverride = true
+PointAtCursor = true
 CharacterName = "Player"
 
-[node name="Dummy Character" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
+[node name="Dummy Character 1" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
 position = Vector2(-150, 100)
+CharacterName = "Dummy"
+
+[node name="Dummy Character 2" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
+position = Vector2(-50, 100)
 CharacterName = "Dummy"
 
 [node name="Camera Manager" type="Node2D" parent="."]
 
+[node name="Camera2D" type="Camera2D" parent="Camera Manager"]
+
 [node name="RigidBody2D" type="RigidBody2D" parent="Camera Manager"]
+visible = false
 collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
@@ -63,7 +92,6 @@ gravity_scale = 0.0
 editor_description = "This collider isn't actually needed for our purposes, but Godot requires it for all PhysicsBody objects.
 
 Using a RigidBody may be outright unnecessary if the Camera itself already supports movement moothing and shake physics."
+visible = false
 shape = SubResource("CircleShape2D_d5bvb")
 disabled = true
-
-[node name="Camera2D" type="Camera2D" parent="Camera Manager/RigidBody2D"]
