@@ -66,17 +66,20 @@ texture = ExtResource("4_7vlt4")
 [node name="Unit Manager" type="Node" parent="Session Manager"]
 
 [node name="Playable Character" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
+RotationSpeed = 240.0
 ControlOverride = true
-PointAtCursor = true
 CharacterName = "Player"
 
 [node name="Dummy Character 1" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
 position = Vector2(-150, 100)
+RotationSpeed = 200.0
 CharacterName = "Dummy"
 
 [node name="Dummy Character 2" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
 position = Vector2(-50, 100)
+RotationSpeed = 0.0
 CharacterName = "Dummy"
+WalkingSpeed = 0.0
 
 [node name="Camera Manager" type="Node2D" parent="."]
 
