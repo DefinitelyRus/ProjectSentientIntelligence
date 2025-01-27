@@ -3,30 +3,88 @@ using System.Collections.Generic;
 
 public partial class WeaponTemplate : Node2D
 {
+	#region Weapon Info
+
+	/// <summary>
+	/// The maximum range this weapon can reach.
+	/// </summary>
+	[ExportGroup("Weapon Info")]
 	[Export] public float Range = 800f;
 
-	public OldLineOfSight LOSNode = null;
+	/// <summary>
+	/// What class of weapon this is.
+	/// </summary>
+	public enum WeaponClasses {
+		None,
+		Rifle,
+		Handgun,
+		HeavyShoulderMount,
+		HeavyUnderslung,
+		ShortHandleMelee,
+		LongHandleMelee,
+		Special
+	}
 
-	public List<PhysicsBody2D> HitList = new();
+	/// <summary>
+	/// What class of weapon this is.
+	/// <br/><br/>
+	/// Gameplay wise, its only purpose is to segregate which characters can use which weapons. <br/>
+	/// It's otherwise purely cosmetic, as each character only has one set of sprites for one weapon class.
+	/// </summary>
+	[Export] public WeaponClasses WeaponClass { get; private set; } = WeaponClasses.None;
 
-	[Export] public RayCast2D LineOfSight;
+	#endregion
 
-	public Vector2 StartPosition { get; private set; }
+	#region Nodes
 
-	public Vector2 EndPosition;
-
-	[Export] public PhysicsBody2D Target1;
-
+	/// <summary>
+	/// The tip of the weapon's barrel.
+	/// <br/><br/>
+	/// This is normally used as the starting point for the weapon's projectile or raycast. <br/>
+	/// Most of the time, this is a child of the weapon node.
+	/// </summary>
+	[ExportGroup("Nodes")]
 	[Export] public Node2D BarrelTip;
 
+	/// <summary>
+	/// The parent character of the weapon.
+	/// </summary>
 	private CharacterTemplate Parent;
 
 	/// <summary>
-	/// If enabled, ignores all obstructions when trying to check line of sight for a target character.
+	/// The raycast used to check line of sight or hitscan weapons.
 	/// </summary>
-	[Export] public bool IgnoreObstructions = false;
+	private RayCast2D LineOfSight;
 
-	//UNTESTED
+	#endregion
+
+	/// <summary>
+	/// A list of all characters hit by the weapon's projectile or raycast.
+	/// </summary>
+	public List<PhysicsBody2D> HitList = [];
+
+	/// <summary>
+	/// Where the weapon's projectile spawns from or its raycast starts from.
+	/// <br/><br/>
+	/// This is normally at the weapon's barrel tip.
+	/// Failing that, it will be at the weapon's position (usuaully equal to the character's position).
+	/// </summary>
+	public Vector2 StartPosition { get; private set; }
+
+	/// <summary>
+	/// Where the weapon's projectile or raycast hits.
+	/// </summary>
+	public Vector2 EndPosition;
+
+	#region Hitscan Flags
+
+	/// <summary>
+	/// If enabled, ignores all obstructions when trying to check line of sight for a target character.
+	/// </summary>\
+	[ExportGroup("Hitscan Flags")]
+	[Export] public bool IgnoreObstructions = false;
+	
+	//NOTE: UNTESTED
 	/// <summary>
 	/// If enabled, ignores all other characters when trying to check line of sight for a target character.
 	/// </summary>
@@ -37,27 +95,14 @@ public partial class WeaponTemplate : Node2D
 	/// </summary>
 	[Export] public bool DamageAllCharacters = false;
 
-	/*
-	 * Hitscan weapons fire a "ray" from the weapon's barrel to the collidedBody position.
-	 * The collidedBody position is determined by the collidedBody enemy's position by default.
-	 * This can be overridden by the player's mouse position when debugging.
-	 * 
-	 * This is done by creating an Area2D node as a child of the weapon node.
-	 * Its purpose is to scan all hittable objects in the game world that crosses its "path".
-	 * The Area2D node's length is the weapon's range, while its position and rotation is dependent on where the weapon's barrel is (startPosition) and where the collidedBody position is (endPosition).
-	 * 
-	 * The exact behavior of the weapon depends on its implementation.
-	 * By default, it will damage the first enemy it hits and ignore all other objects beyond that. Though, its range can be modified to hit only the 5th to 7th enemy it hits, for example.
-	 * Also by default, it won't damage any enemies if the closest hittable object is an obstruction.
-	 */
+	#endregion
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		Parent = GetParent<CharacterTemplate>();
+		LineOfSight = Parent.LineOfSight;
 		StartPosition = (BarrelTip is null) ? Parent.GlobalPosition : BarrelTip.GlobalPosition;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if (Parent.PointAtCursor) {

@@ -196,20 +196,31 @@ public partial class CharacterTemplate : CharacterBody2D
 	#region Nodes
 
 	/// <summary>
-	/// This character's sprite.
+	/// This character's collider.
 	/// </summary>
 	[ExportGroup("Nodes")]
+	[Export] public CollisionShape2D Collider;
+
+	/// <summary>
+	/// This character's sprite.
+	/// </summary>
 	[Export] public Sprite2D Sprite;
 
 	/// <summary>
-	/// This character's collider.
+	/// This character's weapon.
 	/// </summary>
-	[Export] public CollisionShape2D Collider;
+	[Export] public WeaponTemplate Weapon;
+
+	/// <summary>
+	/// This character's line of sight ray cast.
+	/// </summary>
+	[Export] public RayCast2D LineOfSight;
 
 	#endregion
 
 	#region Character Information
 
+	[ExportGroup("Character Information")]
 	[Export] public string CharacterName = "Unnamed Character";
 
 	[Export] public int HitPointsMax = 100;
@@ -219,6 +230,7 @@ public partial class CharacterTemplate : CharacterBody2D
 	[Export] public int ShieldPointsMax = 100;
 
 	public int ShieldPoints = 100;
+
 	#endregion
 
 	#region Movement
