@@ -1,11 +1,14 @@
 using Godot;
+using System.Linq;
 
 /// <summary>
 /// A tool to easily transform a collider to match a sprite's size and position.
 /// </summary>
-[Tool] public partial class ColliderObject : CollisionShape2D
+[Tool] public partial class ColliderEasyTransform : CollisionShape2D
 {
 	#region Tools (Buttons)
+
+	#region Auto-sizer
 
 	/// <summary>
 	/// On TRUE, the collider will automatically align to the sprite's size.
@@ -20,6 +23,26 @@ using Godot;
 	}
 
 	/// <summary>
+	/// Updates the collider's size to match the sprite's size.
+	/// By default, this takes the 
+	/// </summary>
+	private void MatchColliderSizeToSprite() {
+		AssignPrerequisiteNodes();
+
+		//Edit the RectangleShape2D's shape size to match the sprite's size.
+		if (collider.Shape is RectangleShape2D rectangle) {
+			rectangle.Size = new Vector2(
+				sprite.RegionRect.Size.X * sprite.Scale.X,
+				sprite.RegionRect.Size.Y * sprite.Scale.Y
+			);
+		} else GD.PrintErr("[ColliderEasyTransform] Collider is not a BoxShape3D. Cannot auto-align.");
+	}
+
+	#endregion
+
+	#region Auto-positioner
+
+	/// <summary>
 	/// On TRUE, the collider will automatically move to the sprite's base.
 	/// This always returns FALSE and does nothing in runtime.
 	/// </summary>
@@ -29,6 +52,25 @@ using Godot;
 			if (Engine.IsEditorHint() && value) PositionColliderToSpriteBase();
 		}
 	}
+
+	/// <summary>
+	/// Updates the collider's position to move to the sprite's base.
+	/// </summary>
+	private void PositionColliderToSpriteBase() {
+		AssignPrerequisiteNodes();
+
+		//Moves the collider to the bottom of the sprite while still completely overlapping.
+		if (collider.Shape is RectangleShape2D rectangle) {
+			collider.Position = new Vector2(
+				collider.Position.X,
+				sprite.Position.Y + (sprite.RegionRect.Size.Y * sprite.Scale.Y / 2 - rectangle.Size.Y / 2)
+			);
+		} else GD.PrintErr("[ColliderEasyTransform] Collider is not a RectangleShape2D. Cannot auto-position.");
+	}
+
+	#endregion
+
+	#region Collider size and position resetter
 
 	/// <summary>
 	/// On TRUE, the collider will reset to default size and position.
@@ -41,6 +83,20 @@ using Godot;
 			if (Engine.IsEditorHint() && value) ResetColliderSizeAndPosition();
 		}
 	}
+
+	/// <summary>
+	/// Resets the collider's size and position to default.
+	/// </summary>
+	private void ResetColliderSizeAndPosition() {
+		AssignPrerequisiteNodes();
+
+		////Reset the collider's size and position to default.
+		collider.Position = Vector2.Zero;
+		if (collider.Shape is RectangleShape2D rectangle) rectangle.Size = Vector2.One * 10;
+		else GD.PrintErr("[ColliderEasyTransform] Collider is not a RectangleShape2D. Cannot reset.");
+	}
+
+	#endregion
 
 	#endregion
 
@@ -65,7 +121,7 @@ using Godot;
 	/// If the sprite or collider is null, this will try to find the first child instance.
 	/// </summary>
 	private void AssignPrerequisiteNodes() {
-		foreach (Node2D child in GetParent().GetChildren()) {
+		foreach (Node2D child in GetParent().GetChildren().Cast<Node2D>()) {
 			if (child is Sprite2D sprite && this.sprite is null) this.sprite = sprite;
 		}
 		sprite = sprite is null ? GetParent().GetChild<Sprite2D>(0) : sprite;
@@ -84,52 +140,5 @@ using Godot;
 			return;
 		}
 		#endregion
-	}
-
-	/// <summary>
-	/// Updates the collider's size to match the sprite's size.
-	/// By default, this takes the 
-	/// </summary>
-	private void MatchColliderSizeToSprite() {
-		AssignPrerequisiteNodes();
-
-		//Edit the RectangleShape2D's shape size to match the sprite's size.
-		if (collider.Shape is RectangleShape2D rectangle) {
-			rectangle.Size = new Vector2(
-				sprite.RegionRect.Size.X * sprite.Scale.X,
-				sprite.RegionRect.Size.Y * sprite.Scale.Y
-			);
-		}
-
-		else GD.PrintErr("[ColliderEasyTransform] Collider is not a BoxShape3D. Cannot auto-align.");
-	}
-
-	/// <summary>
-	/// Updates the collider's position to move to the sprite's base.
-	/// </summary>
-	private void PositionColliderToSpriteBase() {
-		AssignPrerequisiteNodes();
-
-		//Moves the collider to the bottom of the sprite while still completely overlapping.
-		if (collider.Shape is RectangleShape2D rectangle) {
-			collider.Position = new Vector2(
-				collider.Position.X,
-				sprite.Position.Y + (sprite.RegionRect.Size.Y * sprite.Scale.Y / 2 - rectangle.Size.Y / 2)
-			);
-		}
-		
-		else GD.PrintErr("[ColliderEasyTransform] Collider is not a RectangleShape2D. Cannot auto-position.");
-	}
-
-	/// <summary>
-	/// Resets the collider's size and position to default.
-	/// </summary>
-	private void ResetColliderSizeAndPosition() {
-		AssignPrerequisiteNodes();
-
-		////Reset the collider's size and position to default.
-		collider.Position = Vector2.Zero;
-		if (collider.Shape is RectangleShape2D rectangle) rectangle.Size = Vector2.One * 10;
-		else GD.PrintErr("[ColliderEasyTransform] Collider is not a RectangleShape2D. Cannot reset.");
 	}
 }

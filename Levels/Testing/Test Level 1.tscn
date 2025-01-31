@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://beaoe1v477tg7"]
 
-[ext_resource type="Script" path="res://Scripts/Experimental/LevelManager.cs" id="1_ccu0n"]
-[ext_resource type="Texture2D" uid="uid://csutnbg8nwoag" path="res://Sprites/Experimental/Bonus Map.png" id="2_jo12g"]
-[ext_resource type="PackedScene" uid="uid://bgbhteel27gkj" path="res://Scenes/Objects/Dynamic/Character Template.tscn" id="3_5m6ky"]
-[ext_resource type="Script" path="res://Scripts/Tools/ColliderObject.cs" id="5_3a6kr"]
-[ext_resource type="Script" path="res://Scripts/Derived Objects/StaticObject.cs" id="7_5rp65"]
-[ext_resource type="Texture2D" uid="uid://bl2eor6ldxbo1" path="res://Sprites/Experimental/Lab Horror.png" id="8_hjrre"]
-[ext_resource type="Script" path="res://Scripts/Miscellaneous/TestTrigger.cs" id="9_4du7m"]
+[ext_resource type="Script" path="res://Scripts/Experimental/LevelManager.cs" id="1_7euvi"]
+[ext_resource type="Texture2D" uid="uid://csutnbg8nwoag" path="res://Sprites/Experimental/Bonus Map.png" id="2_hkfbp"]
+[ext_resource type="PackedScene" uid="uid://bgbhteel27gkj" path="res://Prefabs/Templates/CharacterTemplate.tscn" id="3_3rvy2"]
+[ext_resource type="Script" path="res://Scripts/Miscellaneous/StaticObject.cs" id="4_x4hnt"]
+[ext_resource type="Texture2D" uid="uid://bl2eor6ldxbo1" path="res://Sprites/Experimental/Lab Horror.png" id="5_7smdk"]
+[ext_resource type="Script" path="res://Scripts/Tools/ColliderEasyTransform.cs" id="6_t58dy"]
+[ext_resource type="Script" path="res://Scripts/Experimental/TestTrigger.cs" id="7_1td74"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gph72"]
 size = Vector2(34, 12.5)
@@ -15,29 +15,29 @@ size = Vector2(34, 12.5)
 size = Vector2(200, 200)
 
 [node name="Test Level" type="Node2D"]
-script = ExtResource("1_ccu0n")
+script = ExtResource("1_7euvi")
 
 [node name="Level Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_jo12g")
+texture = ExtResource("2_hkfbp")
 
-[node name="Character Template" parent="." instance=ExtResource("3_5m6ky")]
+[node name="Character Template" parent="." instance=ExtResource("3_3rvy2")]
 
 [node name="Obstruction StaticBody2D" type="StaticBody2D" parent="." node_paths=PackedStringArray("Sprite", "Collider")]
 y_sort_enabled = true
 position = Vector2(-100, 100)
-script = ExtResource("7_5rp65")
+script = ExtResource("4_x4hnt")
 Sprite = NodePath("Sprite2D")
 Collider = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="Obstruction StaticBody2D"]
-texture = ExtResource("8_hjrre")
+texture = ExtResource("5_7smdk")
 region_enabled = true
 region_rect = Rect2(439, 28, 34, 67)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstruction StaticBody2D" node_paths=PackedStringArray("sprite", "collider")]
 position = Vector2(0, 27.25)
 shape = SubResource("RectangleShape2D_gph72")
-script = ExtResource("5_3a6kr")
+script = ExtResource("6_t58dy")
 sprite = NodePath("../Sprite2D")
 collider = NodePath(".")
 
@@ -46,7 +46,7 @@ zoom = Vector2(0.6, 0.6)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(200, 135.135)
-script = ExtResource("9_4du7m")
+script = ExtResource("7_1td74")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_odp40")

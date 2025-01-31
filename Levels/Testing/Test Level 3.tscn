@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0elp1g1k07mk"]
+[gd_scene load_steps=11 format=3 uid="uid://d0elp1g1k07mk"]
 
-[ext_resource type="Script" path="res://Scripts/Experimental/LevelManager.cs" id="1_dnn6d"]
-[ext_resource type="Script" path="res://Scripts/Derived Objects/StaticObject.cs" id="1_gskmw"]
-[ext_resource type="Texture2D" uid="uid://bl2eor6ldxbo1" path="res://Sprites/Experimental/Lab Horror.png" id="2_8onqk"]
-[ext_resource type="Script" path="res://Scripts/Tools/ColliderObject.cs" id="3_o5nqj"]
-[ext_resource type="Texture2D" uid="uid://csutnbg8nwoag" path="res://Sprites/Experimental/Bonus Map.png" id="4_7vlt4"]
-[ext_resource type="PackedScene" uid="uid://bgbhteel27gkj" path="res://Scenes/Objects/Dynamic/Character Template.tscn" id="6_762la"]
+[ext_resource type="Script" path="res://Scripts/Experimental/LevelManager.cs" id="1_6jld2"]
+[ext_resource type="Script" path="res://Scripts/Miscellaneous/StaticObject.cs" id="2_rca2w"]
+[ext_resource type="Texture2D" uid="uid://bl2eor6ldxbo1" path="res://Sprites/Experimental/Lab Horror.png" id="3_y7ox1"]
+[ext_resource type="Script" path="res://Scripts/Tools/ColliderEasyTransform.cs" id="4_1dftc"]
+[ext_resource type="Texture2D" uid="uid://csutnbg8nwoag" path="res://Sprites/Experimental/Bonus Map.png" id="5_lvyi4"]
+[ext_resource type="PackedScene" uid="uid://bgbhteel27gkj" path="res://Prefabs/Templates/CharacterTemplate.tscn" id="6_yivh2"]
+[ext_resource type="Script" path="res://Scripts/Templates/PlayableCharacter.cs" id="7_6h2yr"]
+[ext_resource type="Script" path="res://Scripts/Templates/EnemyCharacter.cs" id="8_0v32p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_joeak"]
 size = Vector2(34, 12.5)
@@ -17,25 +19,25 @@ size = Vector2(34, 12.5)
 [node name="Session Manager" type="Node" parent="."]
 
 [node name="Level Manager" type="Node" parent="Session Manager"]
-script = ExtResource("1_dnn6d")
+script = ExtResource("1_6jld2")
 
 [node name="Obstruction 1 StaticBody2D" type="StaticBody2D" parent="Session Manager/Level Manager" node_paths=PackedStringArray("Sprite", "Collider")]
 y_sort_enabled = true
 position = Vector2(100, -100)
 collision_layer = 2
-script = ExtResource("1_gskmw")
+script = ExtResource("2_rca2w")
 Sprite = NodePath("Sprite2D")
 Collider = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="Session Manager/Level Manager/Obstruction 1 StaticBody2D"]
-texture = ExtResource("2_8onqk")
+texture = ExtResource("3_y7ox1")
 region_enabled = true
 region_rect = Rect2(439, 28, 34, 67)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Session Manager/Level Manager/Obstruction 1 StaticBody2D" node_paths=PackedStringArray("sprite", "collider")]
 position = Vector2(0, 27.25)
 shape = SubResource("RectangleShape2D_joeak")
-script = ExtResource("3_o5nqj")
+script = ExtResource("4_1dftc")
 sprite = NodePath("../Sprite2D")
 collider = NodePath(".")
 
@@ -43,43 +45,41 @@ collider = NodePath(".")
 y_sort_enabled = true
 position = Vector2(50, 100)
 collision_layer = 2
-script = ExtResource("1_gskmw")
+script = ExtResource("2_rca2w")
 Sprite = NodePath("Sprite2D")
 Collider = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="Session Manager/Level Manager/Obstruction 2 StaticBody2D"]
-texture = ExtResource("2_8onqk")
+texture = ExtResource("3_y7ox1")
 region_enabled = true
 region_rect = Rect2(439, 28, 34, 67)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Session Manager/Level Manager/Obstruction 2 StaticBody2D" node_paths=PackedStringArray("sprite", "collider")]
 position = Vector2(0, 27.25)
 shape = SubResource("RectangleShape2D_joeak")
-script = ExtResource("3_o5nqj")
+script = ExtResource("4_1dftc")
 sprite = NodePath("../Sprite2D")
 collider = NodePath(".")
 
 [node name="Level Sprite" type="Sprite2D" parent="Session Manager/Level Manager"]
 z_index = -4096
-texture = ExtResource("4_7vlt4")
+texture = ExtResource("5_lvyi4")
 
 [node name="Unit Manager" type="Node" parent="Session Manager"]
 
-[node name="Playable Character" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
-RotationSpeed = 240.0
+[node name="Playable Character" parent="Session Manager/Unit Manager" instance=ExtResource("6_yivh2")]
+script = ExtResource("7_6h2yr")
 ControlOverride = true
 CharacterName = "Player"
 
-[node name="Dummy Character 1" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
+[node name="Dummy Character 1" parent="Session Manager/Unit Manager" instance=ExtResource("6_yivh2")]
 position = Vector2(-150, 100)
 RotationSpeed = 200.0
 CharacterName = "Dummy"
 
-[node name="Dummy Character 2" parent="Session Manager/Unit Manager" instance=ExtResource("6_762la")]
+[node name="Dummy Character 2" parent="Session Manager/Unit Manager" instance=ExtResource("6_yivh2")]
 position = Vector2(-50, 100)
-RotationSpeed = 0.0
-CharacterName = "Dummy"
-WalkingSpeed = 0.0
+script = ExtResource("8_0v32p")
 
 [node name="Camera Manager" type="Node2D" parent="."]
 

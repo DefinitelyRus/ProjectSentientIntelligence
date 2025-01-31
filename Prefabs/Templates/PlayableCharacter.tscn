@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnv70mngk48pc"]
+
+[ext_resource type="Script" path="res://Scripts/Templates/PlayableCharacter.cs" id="1_gcolj"]
+[ext_resource type="Script" path="res://Scripts/Tools/ColliderEasyTransform.cs" id="2_1cj44"]
+[ext_resource type="Texture2D" uid="uid://v8xcwmdgfq2d" path="res://Sprites/Experimental/Idle.png" id="3_dbd1r"]
+[ext_resource type="Script" path="res://Scripts/Templates/WeaponTemplate.cs" id="4_2v2px"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iqqhj"]
+size = Vector2(48, 25)
+
+[node name="Playable Character" type="CharacterBody2D" node_paths=PackedStringArray("Collider", "Sprite", "Weapon", "LineOfSight")]
+collision_mask = 3
+script = ExtResource("1_gcolj")
+Collider = NodePath("World Collider")
+Sprite = NodePath("Body Sprite")
+Weapon = NodePath("Weapon")
+LineOfSight = NodePath("LineOfSight")
+CharacterName = "Playable Character"
+
+[node name="World Collider" type="CollisionShape2D" parent="." node_paths=PackedStringArray("sprite", "collider")]
+position = Vector2(0, 33.5)
+shape = SubResource("RectangleShape2D_iqqhj")
+script = ExtResource("2_1cj44")
+sprite = NodePath("../Body Sprite")
+collider = NodePath(".")
+
+[node name="Body Sprite" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("3_dbd1r")
+region_enabled = true
+region_rect = Rect2(19, 20, 12, 23)
+
+[node name="Weapon" type="Node2D" parent="."]
+script = ExtResource("4_2v2px")
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+collision_mask = 3
