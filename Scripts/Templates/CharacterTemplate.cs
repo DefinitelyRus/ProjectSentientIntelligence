@@ -5,73 +5,92 @@ public partial class CharacterTemplate : CharacterBody2D
 	#region Rotation
 
 	/// <summary>
-	/// How quickly the character rotates.
-	/// <br/><br/>
-	/// Measured in degrees per second. <br/>
-	/// There is no benefit to exceeding 1000 degrees per second and, depending on your use-case,
-	/// it may be more beneficial to use <see cref="InstantRotation"/> instead.
+	///		How quickly the character rotates.
+	///		<br/><br/>
+	///		Measured in degrees per second. <br/>
+	///		There is no benefit to exceeding 1000 degrees per second and,
+	///		depending on your use-case,
+	///		it may be more beneficial to use <see cref="InstantRotation"/> instead.
 	/// </summary>
 	[ExportGroup("Rotation")]
 	[Export(PropertyHint.Range, "0, 1000, 2")] public float RotationSpeed = 240f;
 
 	/// <summary>
-	/// Skips the linear rotation towards the target angle and instantly sets the character's facing direction.
-	/// <br/><br/>
-	/// Useful for when a character is required to change direction instantly
-	/// or if the rotation has to be overridden by external logic.
+	///		Skips the linear rotation towards the target angle
+	///		and instantly sets the character's facing direction.
+	///		<br/><br/>
+	///		Useful for when a character is required to change direction instantly
+	///		or if the rotation has to be overridden by external logic.
 	/// </summary>
 	[Export] public bool InstantRotation = false;
 
 	/// <summary>
-	/// The 8 basic cardinal directions where characters can face towards.
+	///		The 8 basic cardinal directions where characters can face towards.
 	/// </summary>
 	public enum CardinalDirection { N, NE, E, SE, S, SW, W, NW }
 
 	/// <summary>
-	/// Controls where the character should be facing.
-	/// <br/><br/>
-	/// If you intend to change where the character is facing,
-	/// please consider using <see cref="FaceTowards(float, double, float)"/> instead. <br/>
-	/// Use this if a direction-reliant action needs to be performed, like sprite changes.
-	/// <br/><br/>
-	/// This is used to determine which sprite to use and where certain nodes should be placed.
-	/// In most cases, the face direction is purely visual and does not affect the character's actions.
+	///		Controls where the character should be facing.
+	///		<br/><br/>
+	///		If you intend to change where the character is facing,
+	///		please consider using <see cref="FaceTowards(float, double, float)"/> instead.
+	///		<br/>
+	///		Use this if a direction-reliant action needs to be performed, like sprite changes.
+	///		<br/><br/>
+	///		This is used to determine which sprite to use
+	///		and where certain nodes should be placed.
+	///		In most cases, the face direction is purely visual
+	///		and does not affect the character's actions.
 	/// </summary>
 	public CardinalDirection FaceDirection { get; set; }
 
 	/// <summary>
-	/// The angle at which the character is facing.
-	/// <br/><br/>
-	/// If you intend to change where the character is facing,
-	/// please consider using <see cref="FaceTowards(float, double, float)"/> instead. <br/>
-	/// Use this if an angle-reliant action needs to be performed, like aiming weapons or moving.
-	/// <br/><br/>
-	/// This is used to control the vector at which the character is moving and direction the character should be facing (<see cref="FaceDirection"/>).
+	///		The angle at which the character is facing.
+	///		<br/><br/>
+	///		If you intend to change where the character is facing,
+	///		please consider using <see cref="FaceTowards(float, double, float)"/> instead.
+	///		<br/>
+	///		Use this if an angle-reliant action needs to be performed,
+	///		like aiming weapons or moving.
+	///		<br/><br/>
+	///		This is used to control the vector at which the character is moving
+	///		and direction the character should be facing (<see cref="FaceDirection"/>).
 	/// </summary>
 	public float FaceAngle { get; set; }
 
 	/// <summary>
-	/// Faces the character towards the specified angle.
-	/// <br/><br/>
-	/// Only use this if an instant change in direction is needed.
-	/// Otherwise, use <see cref="FaceTowards(float, double, float)"/> for a smooth transition.
-	/// <br/><br/>
-	/// May be overridden in subclasses to add more or reduce directions, or to add more functionality.
+	///		Faces the character towards the specified angle.
+	///		<br/><br/>
+	///		Only use this if an instant change in direction is needed.
+	///		Otherwise, use <see cref="FaceTowards(float, double, float)"/>
+	///		for a smooth transition.
+	///		<br/><br/>
+	///		May be overridden in subclasses to add more or reduce directions,
+	///		or to add more functionality.
 	/// </summary>
-	/// <param name="eulerAngle"></param>
-	public virtual void UpdateFaceDirection(float eulerAngle) {
+	/// <param name="eulerAngle">
+	///		The angle at which the character will approximately face towards.
+	///	</param>
+	/// <param name="directionCount">
+	///		How many directions this character supports.
+	///	</param>
+	public virtual void UpdateFaceDirection(float eulerAngle, ushort directionCount = 8) {
 		eulerAngle = Mathf.PosMod(eulerAngle, 360f);
 
 		//Convert the targetAngle to a CardinalDirection.
-		if (eulerAngle >= 337.5f || eulerAngle < 22.5f) FaceDirection = CardinalDirection.N;
-		else if (eulerAngle >= 22.5f && eulerAngle < 67.5f) FaceDirection = CardinalDirection.NE;
-		else if (eulerAngle >= 67.5f && eulerAngle < 112.5f) FaceDirection = CardinalDirection.E;
-		else if (eulerAngle >= 112.5f && eulerAngle < 157.5f) FaceDirection = CardinalDirection.SE;
-		else if (eulerAngle >= 157.5f && eulerAngle < 202.5f) FaceDirection = CardinalDirection.S;
-		else if (eulerAngle >= 202.5f && eulerAngle < 247.5f) FaceDirection = CardinalDirection.SW;
-		else if (eulerAngle >= 247.5f && eulerAngle < 292.5f) FaceDirection = CardinalDirection.W;
-		else if (eulerAngle >= 292.5f && eulerAngle < 337.5f) FaceDirection = CardinalDirection.NW;
-		else FaceDirection = CardinalDirection.N;
+		if (directionCount == 8) {
+			if (eulerAngle >= 337.5f || eulerAngle < 22.5f) FaceDirection = CardinalDirection.N;
+			else if (eulerAngle >= 22.5f && eulerAngle < 67.5f) FaceDirection = CardinalDirection.NE;
+			else if (eulerAngle >= 67.5f && eulerAngle < 112.5f) FaceDirection = CardinalDirection.E;
+			else if (eulerAngle >= 112.5f && eulerAngle < 157.5f) FaceDirection = CardinalDirection.SE;
+			else if (eulerAngle >= 157.5f && eulerAngle < 202.5f) FaceDirection = CardinalDirection.S;
+			else if (eulerAngle >= 202.5f && eulerAngle < 247.5f) FaceDirection = CardinalDirection.SW;
+			else if (eulerAngle >= 247.5f && eulerAngle < 292.5f) FaceDirection = CardinalDirection.W;
+			else if (eulerAngle >= 292.5f && eulerAngle < 337.5f) FaceDirection = CardinalDirection.NW;
+			else FaceDirection = CardinalDirection.N;
+		}
+
+		//TODO: If the directionCount is 4, limit the directions to N, E, S, W.
 	}
 
 	/// <summary>
@@ -309,6 +328,18 @@ public partial class CharacterTemplate : CharacterBody2D
 
 	#endregion
 
+	public virtual void Affect() {
+		Kill();
+	}
+
+	public virtual void Kill() {
+		// Code for character death goes here.
+
+		QueueFree();
+	}
+
+	#region Godot Overrides
+
 	public override void _Ready() {
 		//All of these assignments are temporary; they are inherently flawed.
 		//It does not account for missing or misordered nodes.
@@ -367,13 +398,5 @@ public partial class CharacterTemplate : CharacterBody2D
 		#endregion
 	}
 
-	public virtual void Affect() {
-		Kill();
-	}
-
-	public virtual void Kill() {
-		// Code for character death goes here.
-
-		QueueFree();
-	}
+	#endregion
 }
