@@ -220,16 +220,31 @@ public partial class CharacterTemplate : CharacterBody2D
 
 	#region Character Information
 
+	/// <summary>
+	/// The name of the character. Duh.
+	/// </summary>
 	[ExportGroup("Character Information")]
 	[Export] public string CharacterName = "Unnamed Character";
+	
+	/// <summary>
+	/// How much health the character can have.
+	/// </summary>
+	[Export(PropertyHint.Range, "1, 30, 1")] public int HitPointsMax = 5;
 
-	[Export] public int HitPointsMax = 100;
+	/// <summary>
+	/// How much health the character currently has.
+	/// </summary>
+	public int HitPoints = 10;
 
-	public int HitPoints = 100;
+	/// <summary>
+	/// How much shield the character can have.
+	/// </summary>
+	[Export(PropertyHint.Range, "1, 30, 1")] public int ShieldPointsMax = 10;
 
-	[Export] public int ShieldPointsMax = 100;
-
-	public int ShieldPoints = 100;
+	/// <summary>
+	/// How much shield the character currently has.
+	/// </summary>
+	public int ShieldPoints = 10;
 
 	#endregion
 
