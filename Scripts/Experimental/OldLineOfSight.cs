@@ -6,10 +6,10 @@ using System.Linq;
 /// A node that scans all hittable objects in the game world that crosses its "path".
 /// It serves as an alternative to using proper raycasting, since Rus couldn't figure out how to do it properly like an idiot.
 /// <br/><br/>
-/// This node must only be created by a WeaponTemplate node, which in itself is contained by a PhysicsBody2D node. This is to ensure that the raycast is always relative to the parent character's position, along with other checks that rely on this structure.
+/// This node must only be created by a Weapon node, which in itself is contained by a PhysicsBody2D node. This is to ensure that the raycast is always relative to the parent character's position, along with other checks that rely on this structure.
 /// <br/><br/>
 /// Structure: <br/>
-/// "ParentCharacter" PhysicsBody2D > "Weapon" WeaponTemplate (Node2D) > "this" OldLineOfSight (Area2D)
+/// "ParentCharacter" PhysicsBody2D > "Weapon" Weapon (Node2D) > "this" OldLineOfSight (Area2D)
 /// </summary>
 public partial class OldLineOfSight : Area2D {
 
@@ -17,16 +17,16 @@ public partial class OldLineOfSight : Area2D {
 
 	/// <summary>
 	/// The weapon that this node is attached to and created from.
-	/// There is no need to assign this manually, as it is automatically set to the parent WeaponTemplate node once added to the tree.
+	/// There is no need to assign this manually, as it is automatically set to the parent Weapon node once added to the tree.
 	/// </summary>
-	public WeaponTemplate Weapon;
+	public Weapon Weapon;
 
 	/// <summary>
-	/// The parent character that this node's WeaponTemplate is a child of.
+	/// The parent character that this node's Weapon is a child of.
 	/// There is no need to assign this manually, as it is automatically set to the parent PhysicsBody2D node once added to the tree.
 	/// <br/><br/>
 	/// Structure: <br/>
-	/// "ParentCharacter" (PhysicsBody2D) > WeaponTemplate (Node2D) > OldLineOfSight (Area2D)
+	/// "ParentCharacter" (PhysicsBody2D) > Weapon (Node2D) > OldLineOfSight (Area2D)
 	/// </summary>
 	private PhysicsBody2D ParentCharacter;
 
@@ -119,7 +119,7 @@ public partial class OldLineOfSight : Area2D {
 
 		Name = "Hitscan Area";
 
-		Weapon = GetParent<WeaponTemplate>();
+		Weapon = GetParent<Weapon>();
 
 		ParentCharacter = Weapon.GetParent<PhysicsBody2D>();
 

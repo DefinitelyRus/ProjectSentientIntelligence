@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Templates/PlayableCharacter.cs" id="1_gcolj"]
 [ext_resource type="Script" path="res://Scripts/Tools/ColliderEasyTransform.cs" id="2_1cj44"]
 [ext_resource type="Texture2D" uid="uid://v8xcwmdgfq2d" path="res://Sprites/Experimental/Idle.png" id="3_dbd1r"]
-[ext_resource type="Script" path="res://Scripts/Templates/WeaponTemplate.cs" id="4_2v2px"]
+[ext_resource type="Script" path="res://Scripts/Templates/Weapon.cs" id="4_2v2px"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iqqhj"]
 size = Vector2(48, 25)

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class CharacterTemplate : CharacterBody2D
+public partial class Character : CharacterBody2D
 {
 	#region Rotation
 
@@ -117,13 +117,17 @@ public partial class CharacterTemplate : CharacterBody2D
 	///		This is applied as a multiplier to frameDelta.
 	///	</param>
 	public void FaceTowards(float targetAngle, double frameDelta, float rotationSpeed = 1) {
+		//TODO: If rotation is 0, the rotationSpeed should be equal to RotationSpeed.
+		//TODO: Update the documentation to reflect the above change.
+		//TODO: Update the overload to do the same.
+
 		if (targetAngle == FaceAngle) return;
 		if (InstantRotation) {
 			FaceAngle = targetAngle;
 			return;
 		}
 
-		//GD.Print("\n[CharacterTemplate] Rotating...");
+		//GD.Print("\n[Character] Rotating...");
 
 		//Clamp the targetAngle from 0 to 360.
 		targetAngle = Mathf.PosMod(targetAngle, 360);
@@ -228,7 +232,7 @@ public partial class CharacterTemplate : CharacterBody2D
 	/// <summary>
 	/// This character's weapon.
 	/// </summary>
-	[Export] public WeaponTemplate Weapon;
+	[Export] public Weapon Weapon;
 
 	/// <summary>
 	/// This character's line of sight ray cast.

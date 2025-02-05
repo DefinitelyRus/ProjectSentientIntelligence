@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using static WeaponTemplate;
+using static Weapon;
 
-public partial class PlayableCharacter : CharacterTemplate {
+public partial class PlayableCharacter : Character {
 
 	WeaponClasses WeaponClass { get; set; } = WeaponClasses.None;
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bgbhteel27gkj"]
 
-[ext_resource type="Script" path="res://Scripts/Templates/CharacterTemplate.cs" id="1_3e5vq"]
+[ext_resource type="Script" path="res://Scripts/Templates/Character.cs" id="1_3e5vq"]
 [ext_resource type="Texture2D" uid="uid://v8xcwmdgfq2d" path="res://Sprites/Experimental/Idle.png" id="2_rlql0"]
 [ext_resource type="Script" path="res://Scripts/Tools/ColliderEasyTransform.cs" id="3_ap5gk"]
-[ext_resource type="Script" path="res://Scripts/Templates/WeaponTemplate.cs" id="4_lewh1"]
+[ext_resource type="Script" path="res://Scripts/Templates/Weapon.cs" id="4_lewh1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iqqhj"]
 size = Vector2(48, 25)

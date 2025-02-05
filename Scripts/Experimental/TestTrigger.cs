@@ -22,7 +22,7 @@ public partial class TestTrigger : Area2D
 	}
 
 	private void OnBodyEntered(Node body) {
-		if (body is CharacterTemplate character) {
+		if (body is Character character) {
 			character.StatusMultiplier = 3.0f;
 			charactersInArea.Add(character);
 			GD.Print("Character entered the trigger: " + character.Name);
@@ -31,7 +31,7 @@ public partial class TestTrigger : Area2D
 	}
 
 	private void OnBodyExited(Node body) {
-		if (body is CharacterTemplate character) {
+		if (body is Character character) {
 			character.StatusMultiplier = 1.0f;
 			charactersInArea.Remove(character);
 			GD.Print("Body exited the trigger: " + character.Name);

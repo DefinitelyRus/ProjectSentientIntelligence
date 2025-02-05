@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class WeaponTemplate : Node2D
+public partial class Weapon : Node2D
 {
 	#region Weapon Info
 
@@ -49,7 +49,7 @@ public partial class WeaponTemplate : Node2D
 	/// <summary>
 	/// The parent character of the weapon.
 	/// </summary>
-	private CharacterTemplate Parent;
+	private Character Parent;
 
 	/// <summary>
 	/// The raycast used to check line of sight or hitscan weapons.
@@ -98,7 +98,7 @@ public partial class WeaponTemplate : Node2D
 	#endregion
 
 	public override void _Ready() {
-		Parent = GetParent<CharacterTemplate>();
+		Parent = GetParent<Character>();
 		LineOfSight = Parent.LineOfSight;
 		StartPosition = (BarrelTip is null) ? Parent.GlobalPosition : BarrelTip.GlobalPosition;
 	}
@@ -130,11 +130,11 @@ public partial class WeaponTemplate : Node2D
 		}
 	}
 
-	public virtual void Use(CharacterTemplate targetCharacter = null) {
+	public virtual void Use(Character targetCharacter = null) {
 		GD.Print("\nScanning...");
 
-		foreach (CharacterTemplate character in GetAllCharactersInLineOfSight(targetCharacter)) {
-			GD.Print($"[WeaponTemplate] Affecting {character}...");
+		foreach (Character character in GetAllCharactersInLineOfSight(targetCharacter)) {
+			GD.Print($"[Weapon] Affecting {character}...");
 			character.Affect();
 		}
 	}
@@ -146,7 +146,7 @@ public partial class WeaponTemplate : Node2D
 	/// </summary>
 	/// <param name="targetCharacter">The specific <see cref="CharacterObject"/> instance to check for collision. If left at null, this will instead check for any character collision.</param>
 	/// <returns>A boolean.</returns>
-	public bool IsCharacterInLineOfSight(CharacterTemplate targetCharacter = null) {
+	public bool IsCharacterInLineOfSight(Character targetCharacter = null) {
 		bool TargetInLineOfSight;
 		LineOfSight.Enabled = true;
 
@@ -160,37 +160,37 @@ public partial class WeaponTemplate : Node2D
 		if (LineOfSight.IsColliding()) {
 			PhysicsBody2D collidedBody = LineOfSight.GetCollider() as PhysicsBody2D;
 
-			//If the collision is with a CharacterTemplate...
-			if (collidedBody is CharacterTemplate collidedCharacter) {
+			//If the collision is with a Character...
+			if (collidedBody is Character collidedCharacter) {
 
 				//If the collidedBody character is null...
 				if (targetCharacter is null) {
 
-					//Check for any CharacterTemplate collision.
+					//Check for any Character collision.
 					TargetInLineOfSight = true;
 					collidedCharacter.Kill(); //TEMP. This operation should be completely harmless.
-					GD.Print($"[WeaponTemplate] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
+					GD.Print($"[Weapon] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
 				}
 
-				//Else, check if it's the specified CharacterTemplate.
+				//Else, check if it's the specified Character.
 				else {
 					if (collidedCharacter == targetCharacter) {
-						GD.Print($"[WeaponTemplate] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
+						GD.Print($"[Weapon] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
 						TargetInLineOfSight = true;
 						//collidedCharacter.Kill(); //TEMP. This operation should be completely harmless.
 					}
 					
 					else {
 						TargetInLineOfSight = false;
-						GD.Print($"[WeaponTemplate] Line of sight for collidedBody");
+						GD.Print($"[Weapon] Line of sight for collidedBody");
 					}
 				}
 			}
 			
-			//If the collision is not with a CharacterTemplate...
+			//If the collision is not with a Character...
 			else {
 				TargetInLineOfSight = false;
-				GD.Print($"[WeaponTemplate] Line of sight blocked by {collidedBody.Name}.");
+				GD.Print($"[Weapon] Line of sight blocked by {collidedBody.Name}.");
 			}
 		}
 
@@ -204,22 +204,22 @@ public partial class WeaponTemplate : Node2D
 	}
 
 	/// <summary>
-	/// Gets the first <see cref="CharacterTemplate"/> in line of sight.
+	/// Gets the first <see cref="Character"/> in line of sight.
 	/// <br/><br/>
 	/// This is normally used for weapons that damage only one character.
 	/// It determines which <see cref="CharacterObject"/> to affect,
 	/// as some weapons cannot penetrate <see cref="CharacterBody2D"/> nodes.
 	/// </summary>
-	/// <param name="targetCharacter">The specific <see cref="CharacterTemplate"/> to look for an attempt to reach. Required when <see cref="IgnoreOtherCharacters"/> is enabled.</param>
-	/// <returns>A <see cref="CharacterTemplate"/> node. This may change depending on whether <see cref="IgnoreObstructions"/> and/or <see cref="IgnoreOtherCharacters"/> are enabled.</returns>
-	public CharacterTemplate GetCharacterInLineOfSight(CharacterTemplate targetCharacter = null) {
+	/// <param name="targetCharacter">The specific <see cref="Character"/> to look for an attempt to reach. Required when <see cref="IgnoreOtherCharacters"/> is enabled.</param>
+	/// <returns>A <see cref="Character"/> node. This may change depending on whether <see cref="IgnoreObstructions"/> and/or <see cref="IgnoreOtherCharacters"/> are enabled.</returns>
+	public Character GetCharacterInLineOfSight(Character targetCharacter = null) {
 		List<PhysicsBody2D> ignoredBodies = new();
-		CharacterTemplate affectedCharacter = null;
+		Character affectedCharacter = null;
 		LineOfSight.Enabled = true;
 
 		//Enforces the targetCharacter parameter when IgnoreOtherCharacters is enabled.
 		if (IgnoreOtherCharacters && targetCharacter is null) {
-			GD.PrintErr("[WeaponTemplate] Target character is null. Ignoring all other characters in line of sight.");
+			GD.PrintErr("[Weapon] Target character is null. Ignoring all other characters in line of sight.");
 			LineOfSight.Enabled = false;
 			return null;
 		}
@@ -242,17 +242,17 @@ public partial class WeaponTemplate : Node2D
 			 * I have no idea why it does that and I'm not gonna bother with a proper fix.
 			 */
 			if (LineOfSight.GetCollider() is not PhysicsBody2D collidedBody) {
-				GD.Print("[WeaponTemplate] Ignoring null body in line of sight.");
+				GD.Print("[Weapon] Ignoring null body in line of sight.");
 				continue;
 			}
 
-			//If the collision is with a CharacterTemplate...
-			if (collidedBody is CharacterTemplate collidedCharacter) {
+			//If the collision is with a Character...
+			if (collidedBody is Character collidedCharacter) {
 				if (IgnoreOtherCharacters) {
 
 					//Ignore other character.
 					if (collidedCharacter != targetCharacter) {
-						GD.Print($"[WeaponTemplate] Ignoring {collidedCharacter.CharacterName} ({collidedCharacter.Name}) in line of sight.");
+						GD.Print($"[Weapon] Ignoring {collidedCharacter.CharacterName} ({collidedCharacter.Name}) in line of sight.");
 
 						collidedCharacter.SetCollisionLayerValue(1, false);
 						ignoredBodies.Add(collidedCharacter);
@@ -261,7 +261,7 @@ public partial class WeaponTemplate : Node2D
 
 					//Return the matching character.
 					else {
-						GD.Print($"[WeaponTemplate] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
+						GD.Print($"[Weapon] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
 
 						affectedCharacter = collidedCharacter;
 						break;
@@ -273,26 +273,26 @@ public partial class WeaponTemplate : Node2D
 
 					//Return mismatched character.
 					if (collidedCharacter != targetCharacter) {
-						GD.Print($"[WeaponTemplate] Line of sight blocked by {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
+						GD.Print($"[Weapon] Line of sight blocked by {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
 						affectedCharacter = collidedCharacter;
 						break;
 					}
 
 					//Return matching character.
 					else {
-						GD.Print($"[WeaponTemplate] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
+						GD.Print($"[Weapon] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
 						affectedCharacter = collidedCharacter;
 						break;
 					}
 				}
 			}
 
-			//If the collision is not with a CharacterTemplate (usually an obstruction)...
+			//If the collision is not with a Character (usually an obstruction)...
 			else {
 
 				//Ignore obstruction.
 				if (IgnoreObstructions) {
-					GD.Print($"[WeaponTemplate] Ignoring {collidedBody.Name} in line of sight.");
+					GD.Print($"[Weapon] Ignoring {collidedBody.Name} in line of sight.");
 
 					collidedBody.SetCollisionLayerValue(2, false);
 					ignoredBodies.Add(collidedBody);
@@ -301,7 +301,7 @@ public partial class WeaponTemplate : Node2D
 				
 				//Return null.
 				else {
-					GD.Print($"[WeaponTemplate] Line of sight blocked by {collidedBody.Name}.");
+					GD.Print($"[Weapon] Line of sight blocked by {collidedBody.Name}.");
 
 					affectedCharacter = null;
 					break;
@@ -311,7 +311,7 @@ public partial class WeaponTemplate : Node2D
 
 		//Re-enable the collision layers.
 		foreach (PhysicsBody2D body in ignoredBodies) {
-			if (body is CharacterTemplate) body.SetCollisionLayerValue(1, true);
+			if (body is Character) body.SetCollisionLayerValue(1, true);
 			else if (body is StaticBody2D) body.SetCollisionLayerValue(2, true);
 			//NOTE: Change to a subclass if necessary in the future.
 		}
@@ -323,16 +323,16 @@ public partial class WeaponTemplate : Node2D
 	}
 
 	/// <summary>
-	/// Gets all <see cref="CharacterTemplate"/> nodes in line of sight.
+	/// Gets all <see cref="Character"/> nodes in line of sight.
 	/// <br/><br/>
 	/// This is normally used for weapons that damage multiple characters.
 	/// If the weapon has <see cref="IgnoreObstructions"/>, <see cref="IgnoreOtherCharacters"/>, and <see cref="DamageAllCharacters"/> disabled, this method will always return a maximum of 1 item.
-	/// In which case, you should use <see cref="GetCharacterInLineOfSight(CharacterTemplate)"/> instead.
+	/// In which case, you should use <see cref="GetCharacterInLineOfSight(Character)"/> instead.
 	/// </summary>
-	/// <param name="targetCharacter">The specific <see cref="CharacterTemplate"/> to look for an attempt to reach. Only applicable and required when <see cref="IgnoreOtherCharacters"/> is enabled.</param>
+	/// <param name="targetCharacter">The specific <see cref="Character"/> to look for an attempt to reach. Only applicable and required when <see cref="IgnoreOtherCharacters"/> is enabled.</param>
 	/// <returns></returns>
-	public List<CharacterTemplate> GetAllCharactersInLineOfSight(CharacterTemplate targetCharacter = null) {
-		List<CharacterTemplate> affectedCharacters = new();
+	public List<Character> GetAllCharactersInLineOfSight(Character targetCharacter = null) {
+		List<Character> affectedCharacters = new();
 		List<PhysicsBody2D> ignoredBodies = new();
 		LineOfSight.Enabled = true;
 
@@ -354,16 +354,16 @@ public partial class WeaponTemplate : Node2D
 			 * I have no idea why it does that and I'm not gonna bother with a proper fix.
 			 */
 			if (LineOfSight.GetCollider() is not PhysicsBody2D collidedBody) {
-				GD.Print("[WeaponTemplate] Ignoring null body in line of sight.");
+				GD.Print("[Weapon] Ignoring null body in line of sight.");
 				continue;
 			}
 
 			//If the collision is with a character...
-			if (collidedBody is CharacterTemplate collidedCharacter) {
+			if (collidedBody is Character collidedCharacter) {
 
 				//Add all characters in line of sight.
 				if (DamageAllCharacters) {
-					GD.Print($"[WeaponTemplate] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
+					GD.Print($"[Weapon] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
 
 					affectedCharacters.Add(collidedCharacter);
 
@@ -378,7 +378,7 @@ public partial class WeaponTemplate : Node2D
 
 					//Ignore other characters.
 					if (collidedCharacter != targetCharacter) {
-						GD.Print($"[WeaponTemplate] Ignoring {collidedCharacter.CharacterName} ({collidedCharacter.Name}) in line of sight.");
+						GD.Print($"[Weapon] Ignoring {collidedCharacter.CharacterName} ({collidedCharacter.Name}) in line of sight.");
 
 						//Ignore temporarily.
 						collidedCharacter.SetCollisionLayerValue(1, false);
@@ -389,7 +389,7 @@ public partial class WeaponTemplate : Node2D
 
 					//Add the only first character in line of sight.
 					else {
-						GD.Print($"[WeaponTemplate] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
+						GD.Print($"[Weapon] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
 
 						affectedCharacters.Add(collidedCharacter);
 
@@ -399,7 +399,7 @@ public partial class WeaponTemplate : Node2D
 
 				//Add the only first character in line of sight.
 				else {
-					GD.Print($"[WeaponTemplate] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
+					GD.Print($"[Weapon] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
 
 					affectedCharacters.Add(collidedCharacter);
 
@@ -412,7 +412,7 @@ public partial class WeaponTemplate : Node2D
 
 				//Ignore obstruction.
 				if (IgnoreObstructions) {
-					GD.Print("[WeaponTemplate] Ignoring obstruction in line of sight.");
+					GD.Print("[Weapon] Ignoring obstruction in line of sight.");
 
 					//Ignore temporarily.
 					collidedBody.SetCollisionLayerValue(2, false);
@@ -423,7 +423,7 @@ public partial class WeaponTemplate : Node2D
 
 				//Return the list as is.
 				else {
-					GD.Print("[WeaponTemplate] Line of sight blocked by obstruction.");
+					GD.Print("[Weapon] Line of sight blocked by obstruction.");
 					break;
 				}
 			}
@@ -431,7 +431,7 @@ public partial class WeaponTemplate : Node2D
 
 		//Re-enable the collision layers.
 		foreach (PhysicsBody2D body in ignoredBodies) {
-			if (body is CharacterTemplate) body.SetCollisionLayerValue(1, true);
+			if (body is Character) body.SetCollisionLayerValue(1, true);
 			else if (body is StaticBody2D) body.SetCollisionLayerValue(2, true);
 			//NOTE: Change to a subclass if necessary in the future.
 		}
@@ -445,9 +445,9 @@ public partial class WeaponTemplate : Node2D
 	/// <summary>
 	/// Checks if the target is within the weapon's range.
 	/// </summary>
-	/// <param name="targetCharacter">The specific <see cref="CharacterTemplate"/> instance to check for range.</param>
+	/// <param name="targetCharacter">The specific <see cref="Character"/> instance to check for range.</param>
 	/// <returns>A boolean.</returns>
-	public bool RangeCheck(CharacterTemplate targetCharacter) {
+	public bool RangeCheck(Character targetCharacter) {
 		return Parent.GlobalPosition.DistanceTo(targetCharacter.GlobalPosition) <= Range;
 	}
 

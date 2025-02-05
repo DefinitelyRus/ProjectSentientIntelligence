@@ -40,7 +40,7 @@ public partial class ModuleTemplate : Node
 	/// <summary>
 	/// The weapon that the <see cref="ParentCharacter"/> is using.
 	/// </summary>
-	private WeaponTemplate Weapon;
+	private Weapon Weapon;
 
 	#endregion
 
