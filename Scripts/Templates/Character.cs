@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class Character : CharacterBody2D
 {
@@ -239,6 +240,22 @@ public partial class Character : CharacterBody2D
 	/// </summary>
 	[Export] public RayCast2D LineOfSight;
 
+	/// <summary>
+	/// The character's vision "cone".
+	/// <br/><br/>
+	/// This vision "cone" is actually a circle.
+	/// It does not decide which characters are valid. <br/>
+	/// To get valid characters, check <see cref="TargetsInView"/>.
+	/// It's a filtered list of characters only containing valid targets. <br/>
+	/// The radius should change to match the character's <see cref="Weapon.Range"/>. <br/>
+	/// <br/><br/>
+	/// Its purpose is primarily to detect characters' presence within its radius
+	/// without having to check every character in the scene.
+	/// </summary>
+	[Export] public Area2D FieldOfView;
+	//TODO: Create a new C# script for FieldOfView.
+	//NOTE: This Area2D is a circle.
+
 	#endregion
 
 	#region Character Information
@@ -332,17 +349,101 @@ public partial class Character : CharacterBody2D
 
 	#endregion
 
+	#region Targeting
+
+	/// <summary>
+	///	The type of characters this character can target.
+	/// </summary>
+	public enum TargetCharacterTypes { Playable, Enemy, All, None }
+
+	/// <summary>
+	///	The type of characters this character can target.
+	/// </summary>
+	[Export] public TargetCharacterTypes TargetCharacterType = TargetCharacterTypes.Enemy;
+
+	/// <summary>
+	///	How this character should prioritize targets.
+	/// </summary>
+	public enum TargetModes { InsideFovFirst, OutsideFovFirst, InsideFovOnly, OutsideFovOnly, IgnoreFov }
+
+	/// <summary>
+	///	How this character should prioritize targets
+	/// </summary>
+	[Export] public TargetModes TargetMode = TargetModes.InsideFovFirst;
+
+	/// <summary>
+	///	The all valid characters within this character's field of view.
+	///	<br/><br/>
+	///	The validity of a character as a target is determined in
+	///	the field of view's <see cref="FieldOfView.OnCharacterEnter()"/>
+	///	and <see cref="FieldOfView.OnCharacterExit()"/> functions.
+	/// </summary>
+	public List<Character> TargetsInView { get; private set; } = [];
+
+	/// <summary>
+	/// The character this character is targeting.
+	/// </summary>
+	public Character Target;
+
+	/// <summary>
+	///		Searches through <see cref="TargetsInView"/> and returns and/or assigns
+	///		the best candidate (usually the closest to this character).
+	/// </summary>
+	/// <param name="assignAsTarget">
+	///		Whether the best candidate should be assigned as this character's target.
+	///		This is useful for when you want to query the best candidate
+	///		without changing the target.
+	/// </param>
+	/// <returns>
+	///		The best character to target.
+	/// </returns>
+	public virtual Character TargetQuery(bool assignAsTarget = true) {
+		Character bestCandidate = null;
+
+		foreach (Character character in TargetsInView) {
+			//If the best candidate is null, assign the current character as best candidate.
+			if (bestCandidate is null) {
+				bestCandidate = character;
+				continue;
+			}
+
+			//If the current character is closer, assign it as the best candidate.
+			else if (bestCandidate.GlobalPosition.DistanceTo(GlobalPosition) > character.GlobalPosition.DistanceTo(GlobalPosition)) {
+				bestCandidate = character;
+			}
+		}
+
+		if (assignAsTarget) Target = bestCandidate;
+
+		return bestCandidate;
+	}
+
+	#endregion
+
+	//TODO: Create a class to pass as an argument to this function.
+	//It should contain the character stat data that will be affected.
+	//Since not all "attacks" will affect the same stats, this class should be flexible.
+	/// <summary>
+	///		Apply the effects of another character's attack.
+	///		<br/><br/>
+	///		This function is meant to be overridden in subclasses to add more functionality.
+	/// </summary>
 	public virtual void Affect() {
 		Kill();
 	}
 
+	/// <summary>
+	///		Kills the character.
+	///		<br/><br/>
+	///		This function is meant to be overridden in subclasses to add more functionality.
+	/// </summary>
 	public virtual void Kill() {
 		// Code for character death goes here.
 
 		QueueFree();
 	}
 
-	#region Godot Overrides
+	#region Godot
 
 	public override void _Ready() {
 		//All of these assignments are temporary; they are inherently flawed.

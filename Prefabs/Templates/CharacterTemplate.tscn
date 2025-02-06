@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgbhteel27gkj"]
+[gd_scene load_steps=7 format=3 uid="uid://bgbhteel27gkj"]
 
 [ext_resource type="Script" path="res://Scripts/Templates/Character.cs" id="1_3e5vq"]
 [ext_resource type="Texture2D" uid="uid://v8xcwmdgfq2d" path="res://Sprites/Experimental/Idle.png" id="2_rlql0"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iqqhj"]
 size = Vector2(48, 25)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0apdf"]
+radius = 800.0
 
 [node name="Character Template" type="CharacterBody2D" node_paths=PackedStringArray("Collider", "Sprite", "Weapon", "LineOfSight")]
 collision_mask = 3
@@ -34,3 +37,8 @@ script = ExtResource("4_lewh1")
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 collision_mask = 3
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0apdf")
