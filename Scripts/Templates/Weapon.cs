@@ -6,13 +6,13 @@ public partial class Weapon : Node2D
 	#region Weapon Info
 
 	/// <summary>
-	/// The maximum range this weapon can reach.
+	/// 	The maximum range this weapon can reach.
 	/// </summary>
 	[ExportGroup("Weapon Info")]
 	[Export] public float Range = 800f;
 
 	/// <summary>
-	/// What class of weapon this is.
+	/// 	What class of weapon this is.
 	/// </summary>
 	public enum WeaponClasses {
 		None,
@@ -26,10 +26,10 @@ public partial class Weapon : Node2D
 	}
 
 	/// <summary>
-	/// What class of weapon this is.
-	/// <br/><br/>
-	/// Gameplay wise, its only purpose is to segregate which characters can use which weapons. <br/>
-	/// It's otherwise purely cosmetic, as each character only has one set of sprites for one weapon class.
+	/// 	What class of weapon this is.
+	/// 	<br/><br/>
+	/// 	Gameplay wise, its only purpose is to segregate which characters can use which weapons. <br/>
+	/// 	It's otherwise purely cosmetic, as each character only has one set of sprites for one weapon class.
 	/// </summary>
 	[Export] public WeaponClasses WeaponClass { get; private set; } = WeaponClasses.None;
 
@@ -38,60 +38,60 @@ public partial class Weapon : Node2D
 	#region Nodes
 
 	/// <summary>
-	/// The tip of the weapon's barrel.
-	/// <br/><br/>
-	/// This is normally used as the starting point for the weapon's projectile or raycast. <br/>
-	/// Most of the time, this is a child of the weapon node.
+	/// 	The tip of the weapon's barrel.
+	/// 	<br/><br/>
+	/// 	This is normally used as the starting point for the weapon's projectile or raycast. <br/>
+	/// 	Most of the time, this is a child of the weapon node.
 	/// </summary>
 	[ExportGroup("Nodes")]
 	[Export] public Node2D BarrelTip;
 
 	/// <summary>
-	/// The parent character of the weapon.
+	/// 	The parent character of the weapon.
 	/// </summary>
 	private Character Parent;
 
 	/// <summary>
-	/// The raycast used to check line of sight or hitscan weapons.
+	/// 	The raycast used to check line of sight or hitscan weapons.
 	/// </summary>
 	private RayCast2D LineOfSight;
 
 	#endregion
 
 	/// <summary>
-	/// A list of all characters hit by the weapon's projectile or raycast.
+	/// 	A list of all characters hit by the weapon's projectile or raycast.
 	/// </summary>
 	public List<PhysicsBody2D> HitList = [];
 
 	/// <summary>
-	/// Where the weapon's projectile spawns from or its raycast starts from.
-	/// <br/><br/>
-	/// This is normally at the weapon's barrel tip.
-	/// Failing that, it will be at the weapon's position (usuaully equal to the character's position).
+	/// 	Where the weapon's projectile spawns from or its raycast starts from.
+	/// 	<br/><br/>
+	/// 	This is normally at the weapon's barrel tip.
+	/// 	Failing that, it will be at the weapon's position (usuaully equal to the character's position).
 	/// </summary>
 	public Vector2 StartPosition { get; private set; }
 
 	/// <summary>
-	/// Where the weapon's projectile or raycast hits.
+	/// 	Where the weapon's projectile or raycast hits.
 	/// </summary>
 	public Vector2 EndPosition;
 
 	#region Hitscan Flags
 
 	/// <summary>
-	/// If enabled, ignores all obstructions when trying to check line of sight for a target character.
+	/// 	If enabled, ignores all obstructions when trying to check line of sight for a target character.
 	/// </summary>\
 	[ExportGroup("Hitscan Flags")]
 	[Export] public bool IgnoreObstructions = false;
 	
 	//NOTE: UNTESTED
 	/// <summary>
-	/// If enabled, ignores all other characters when trying to check line of sight for a target character.
+	/// 	If enabled, ignores all other characters when trying to check line of sight for a target character.
 	/// </summary>
 	[Export] public bool IgnoreOtherCharacters = false;
 
 	/// <summary>
-	/// If enabled, damages all characters in line of sight.
+	/// 	If enabled, damages all characters in line of sight.
 	/// </summary>
 	[Export] public bool DamageAllCharacters = false;
 
@@ -141,13 +141,14 @@ public partial class Weapon : Node2D
 
 	#region Checks
 	/// <summary>
-	/// Checks if there is a clear line of sight between this and another a <see cref="CharacterObject"/>.
-	/// This is normally used to determine which <see cref="CharacterObject"/> to target, as some weapons cannot penetrate certain/any <see cref="PhysicsBody2D"/> nodes.
+	/// 	Checks if there is a clear line of sight between this and another a <see cref="CharacterObject"/>.
+	/// 	This is normally used to determine which <see cref="CharacterObject"/> to target, as some weapons cannot penetrate certain/any <see cref="PhysicsBody2D"/> nodes.
+	/// 	<br/><br/>
+	/// 	Authors: DefinitelyRus, Earthman7401
 	/// </summary>
 	/// <param name="targetCharacter">The specific <see cref="CharacterObject"/> instance to check for collision. If left at null, this will instead check for any character collision.</param>
 	/// <returns>A boolean.</returns>
 	public bool IsCharacterInLineOfSight(Character targetCharacter = null) {
-		bool TargetInLineOfSight;
 		LineOfSight.Enabled = true;
 
 		//Gets the vector between the weapon's barrel and the collidedBody position, clamped by the weapon's range.
@@ -156,59 +157,45 @@ public partial class Weapon : Node2D
 
 		LineOfSight.ForceRaycastUpdate();
 
-		//If the raycast collides with anything...
-		if (LineOfSight.IsColliding()) {
-			PhysicsBody2D collidedBody = LineOfSight.GetCollider() as PhysicsBody2D;
+		//If there are no raycast collisions...
+		if (!LineOfSight.IsColliding()) return false;
 
-			//If the collision is with a Character...
-			if (collidedBody is Character collidedCharacter) {
+		PhysicsBody2D collidedBody = LineOfSight.GetCollider() as PhysicsBody2D;
 
-				//If the collidedBody character is null...
-				if (targetCharacter is null) {
-
-					//Check for any Character collision.
-					TargetInLineOfSight = true;
-					collidedCharacter.Kill(); //TEMP. This operation should be completely harmless.
-					GD.Print($"[Weapon] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
-				}
-
-				//Else, check if it's the specified Character.
-				else {
-					if (collidedCharacter == targetCharacter) {
-						GD.Print($"[Weapon] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
-						TargetInLineOfSight = true;
-						//collidedCharacter.Kill(); //TEMP. This operation should be completely harmless.
-					}
-					
-					else {
-						TargetInLineOfSight = false;
-						GD.Print($"[Weapon] Line of sight for collidedBody");
-					}
-				}
-			}
-			
-			//If the collision is not with a Character...
-			else {
-				TargetInLineOfSight = false;
-				GD.Print($"[Weapon] Line of sight blocked by {collidedBody.Name}.");
-			}
+		//If the collision is not with a Character...
+		if (collidedBody is not Character collidedCharacter) {
+			GD.Print($"[Weapon] Line of sight blocked by {collidedBody.Name}.");
+			return false;
+		}
+		
+		//If the collidedBody character is null...
+		if (targetCharacter is null) {
+			//Check for any Character collision.
+			collidedCharacter.Kill(); //TEMP. This operation should be completely harmless.
+			GD.Print($"[Weapon] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
+			return true;
 		}
 
-		//If there are no raycast collisions...
-		else TargetInLineOfSight = false;
+		//Else, check if it's the specified Character.
+		if (collidedCharacter == targetCharacter) {
+			GD.Print($"[Weapon] Line of sight confirmed for {collidedCharacter.CharacterName} ({collidedCharacter.Name}).");
+			return true;
+			//collidedCharacter.Kill(); //TEMP. This operation should be completely harmless.
+		}
+		
+		GD.Print($"[Weapon] Line of sight for collidedBody");
+		return false;
 
 		//Disable the raycast for optimization.
 		LineOfSight.Enabled = false;
-
-		return TargetInLineOfSight;
 	}
 
 	/// <summary>
-	/// Gets the first <see cref="Character"/> in line of sight.
-	/// <br/><br/>
-	/// This is normally used for weapons that damage only one character.
-	/// It determines which <see cref="CharacterObject"/> to affect,
-	/// as some weapons cannot penetrate <see cref="CharacterBody2D"/> nodes.
+	/// 	Gets the first <see cref="Character"/> in line of sight.
+	/// 	<br/><br/>
+	/// 	This is normally used for weapons that damage only one character.
+	/// 	It determines which <see cref="CharacterObject"/> to affect,
+	/// 	as some weapons cannot penetrate <see cref="CharacterBody2D"/> nodes.
 	/// </summary>
 	/// <param name="targetCharacter">The specific <see cref="Character"/> to look for an attempt to reach. Required when <see cref="IgnoreOtherCharacters"/> is enabled.</param>
 	/// <returns>A <see cref="Character"/> node. This may change depending on whether <see cref="IgnoreObstructions"/> and/or <see cref="IgnoreOtherCharacters"/> are enabled.</returns>
@@ -323,11 +310,11 @@ public partial class Weapon : Node2D
 	}
 
 	/// <summary>
-	/// Gets all <see cref="Character"/> nodes in line of sight.
-	/// <br/><br/>
-	/// This is normally used for weapons that damage multiple characters.
-	/// If the weapon has <see cref="IgnoreObstructions"/>, <see cref="IgnoreOtherCharacters"/>, and <see cref="DamageAllCharacters"/> disabled, this method will always return a maximum of 1 item.
-	/// In which case, you should use <see cref="GetCharacterInLineOfSight(Character)"/> instead.
+	/// 	Gets all <see cref="Character"/> nodes in line of sight.
+	/// 	<br/><br/>
+	/// 	This is normally used for weapons that damage multiple characters.
+	/// 	If the weapon has <see cref="IgnoreObstructions"/>, <see cref="IgnoreOtherCharacters"/>, and <see cref="DamageAllCharacters"/> disabled, this method will always return a maximum of 1 item.
+	/// 	In which case, you should use <see cref="GetCharacterInLineOfSight(Character)"/> instead.
 	/// </summary>
 	/// <param name="targetCharacter">The specific <see cref="Character"/> to look for an attempt to reach. Only applicable and required when <see cref="IgnoreOtherCharacters"/> is enabled.</param>
 	/// <returns></returns>
@@ -443,7 +430,7 @@ public partial class Weapon : Node2D
 	}
 
 	/// <summary>
-	/// Checks if the target is within the weapon's range.
+	/// 	Checks if the target is within the weapon's range.
 	/// </summary>
 	/// <param name="targetCharacter">The specific <see cref="Character"/> instance to check for range.</param>
 	/// <returns>A boolean.</returns>

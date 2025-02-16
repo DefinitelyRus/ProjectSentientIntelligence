@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class Character : CharacterBody2D
@@ -59,6 +60,7 @@ public partial class Character : CharacterBody2D
 	/// </summary>
 	public float FaceAngle { get; set; }
 
+	//NOTE: UNTESTED
 	/// <summary>
 	///		Faces the character towards the specified angle.
 	///		<br/><br/>
@@ -68,30 +70,21 @@ public partial class Character : CharacterBody2D
 	///		<br/><br/>
 	///		May be overridden in subclasses to add more or reduce directions,
 	///		or to add more functionality.
+	/// 	<br/><br/>
+	/// 	Authors: DefinitelyRus, Earthman7401
 	/// </summary>
 	/// <param name="eulerAngle">
 	///		The angle at which the character will approximately face towards.
 	///	</param>
-	/// <param name="directionCount">
-	///		How many directions this character supports.
-	///	</param>
-	public virtual void UpdateFaceDirection(float eulerAngle, ushort directionCount = 8) {
+	public virtual void UpdateFaceDirection(float eulerAngle) {
 		eulerAngle = Mathf.PosMod(eulerAngle, 360f);
+		ulong directionCount = (ulong)Enum.GetNames(typeof(CardinalDirection)).Length; // funny
 
-		//Convert the targetAngle to a CardinalDirection.
-		if (directionCount == 8) {
-			if (eulerAngle >= 337.5f || eulerAngle < 22.5f) FaceDirection = CardinalDirection.N;
-			else if (eulerAngle >= 22.5f && eulerAngle < 67.5f) FaceDirection = CardinalDirection.NE;
-			else if (eulerAngle >= 67.5f && eulerAngle < 112.5f) FaceDirection = CardinalDirection.E;
-			else if (eulerAngle >= 112.5f && eulerAngle < 157.5f) FaceDirection = CardinalDirection.SE;
-			else if (eulerAngle >= 157.5f && eulerAngle < 202.5f) FaceDirection = CardinalDirection.S;
-			else if (eulerAngle >= 202.5f && eulerAngle < 247.5f) FaceDirection = CardinalDirection.SW;
-			else if (eulerAngle >= 247.5f && eulerAngle < 292.5f) FaceDirection = CardinalDirection.W;
-			else if (eulerAngle >= 292.5f && eulerAngle < 337.5f) FaceDirection = CardinalDirection.NW;
-			else FaceDirection = CardinalDirection.N;
+		float currentAngle = 360f / directionCount / 2;
+		for (uint i = 0; i < directionCount; i++) {
+			if (eulerAngle < currentAngle) FaceDirection = (CardinalDirection)i;
+			currentAngle += 360f / directionCount;
 		}
-
-		//TODO: If the directionCount is 4, limit the directions to N, E, S, W.
 	}
 
 	/// <summary>
