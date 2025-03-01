@@ -60,7 +60,6 @@ public partial class Character : CharacterBody2D
 	/// </summary>
 	public float FaceAngle { get; set; }
 
-	//NOTE: UNTESTED
 	/// <summary>
 	///		Faces the character towards the specified angle.
 	///		<br/><br/>
@@ -74,15 +73,19 @@ public partial class Character : CharacterBody2D
 	/// 	Authors: DefinitelyRus, Earthman7401
 	/// </summary>
 	/// <param name="eulerAngle">
-	///		The angle at which the character will approximately face towards.
+	///		The angle at which the character will approximately face towards relative to the +y axis.
 	///	</param>
+	//TODO: make this take radians instead of degrees
 	public virtual void UpdateFaceDirection(float eulerAngle) {
 		eulerAngle = Mathf.PosMod(eulerAngle, 360f);
 		ulong directionCount = (ulong)Enum.GetNames(typeof(CardinalDirection)).Length; // funny
 
 		float currentAngle = 360f / directionCount / 2;
 		for (uint i = 0; i < directionCount; i++) {
-			if (eulerAngle < currentAngle) FaceDirection = (CardinalDirection)i;
+			if (eulerAngle < currentAngle) {
+			 	FaceDirection = (CardinalDirection)i;
+				break;
+			}
 			currentAngle += 360f / directionCount;
 		}
 	}
@@ -340,6 +343,61 @@ public partial class Character : CharacterBody2D
 	[Export(PropertyHint.Range, "0, 10, 0.05")]
 	public float StatusMultiplier = 1f;
 
+	/// <summary>
+	/// The character stops after being within `MovementDeadzone` units from its target.
+	/// </summary>
+	[Export(PropertyHint.Range, "0, 10000, 1")]
+	public float MovementDeadzone = 50f;
+
+	///	<summary>
+	/// Targets are considered "unreachable" by `MoveLastMileTo` if distance to target is greater than this.
+	/// </summary>
+	[Export(PropertyHint.Range, "0, 10000, 1")]
+	public float LastMileMaxDistance = 1000f;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="position">The position to move to.</param>
+	/// <param name="delta">The time that has passed since the last frame update.</param>
+	/// <returns></returns>
+	Vector2 MoveLastMileTo(Vector2 position, double delta) {
+		// Vector2 pointing from current position to target position
+		Vector2 direction = (position - GlobalPosition);
+
+		// make character face towards target
+		UpdateFaceDirection(Mathf.RadToDeg(-direction.AngleTo(Vector2.Up)));
+
+		// if within deadzone...
+		if (direction.Length() <= MovementDeadzone)
+			direction = Vector2.Zero;
+
+		// check if target is unreachable...
+		if (direction.Length() >= LastMileMaxDistance) {
+			direction = Vector2.Zero;
+			MoveShortHaulTo(position, delta); // PLACEHOLDER
+		}
+
+		// TODO: add collision check
+
+		Vector2 targetVelocity = Vector2.Zero;
+		// Accelerate to the target speed if the MoveDirection is non-zero.
+		if (direction != Vector2.Zero)
+			targetVelocity = Velocity.MoveToward(direction.Normalized() * WalkingSpeed * StatusMultiplier, Acceleration * (float) delta);
+
+		// Otherwise, slow down to a halt.
+		else targetVelocity = Velocity.MoveToward(Vector2.Zero, Friction * (float) delta);
+
+		GD.Print(targetVelocity);
+		return targetVelocity;
+	}
+
+	Vector2 MoveShortHaulTo(Vector2 position, double delta) {
+		// 118.71% FulFilled Emptiness by Isanc
+		// TODO: PSI-34 (implement)
+		return Vector2.Zero; // PLACEHOLDER
+	}
+
 	#endregion
 
 	#region Targeting
@@ -451,18 +509,7 @@ public partial class Character : CharacterBody2D
 	}
 
 	public override void _PhysicsProcess(double delta) {
-
-		//Sets the target speed to the appropriate value.
-		targetSpeed = IsRunning ? RunningSpeed : WalkingSpeed;
-
-		//Accelerate to the target speed if the MoveDirection is non-zero.
-		if (MoveDirection != Vector2.Zero) {
-			Velocity = Velocity.MoveToward(MoveDirection.Normalized() * targetSpeed * StatusMultiplier, Acceleration * (float) delta);
-		}
-
-		//Otherwise, slow down to a halt indepenently on each axis.
-		if (Mathf.Abs(MoveDirection.X) == 0) Velocity = Velocity.MoveToward(new Vector2(0, Velocity.Y), Friction * (float) delta);
-		if (Mathf.Abs(MoveDirection.Y) == 0) Velocity = Velocity.MoveToward(new Vector2(Velocity.X, 0), Friction * (float) delta);
+		Velocity = MoveLastMileTo(GetGlobalMousePosition(), delta);
 
 		//Apply the Velocity value to the CharacterBody2D Node.
 		MoveAndSlide();
