@@ -59,15 +59,8 @@ public partial class ModuleTemplate : Node
 		if (!RequireAlwaysPowered) {
 			IsPowered = isPowered;
 
-			if (isPowered) {
-				IsPowered = true;
-				ActivateModule();
-			}
-			
-			else {
-				IsPowered = false;
-				DeactivateModule();
-			}
+			if (isPowered) ActivateModule();
+			else DeactivateModule();
 		}
 		
 		else EnforceRequiredPower();
