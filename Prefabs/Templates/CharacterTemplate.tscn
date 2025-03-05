@@ -38,7 +38,8 @@ script = ExtResource("4_lewh1")
 [node name="LineOfSight" type="RayCast2D" parent="."]
 collision_mask = 3
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="FieldOfView" type="Area2D" parent="."]
+visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FieldOfView"]
 shape = SubResource("CircleShape2D_0apdf")
