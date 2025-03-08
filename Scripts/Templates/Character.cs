@@ -388,7 +388,6 @@ public partial class Character : CharacterBody2D
 		// Otherwise, slow down to a halt.
 		else targetVelocity = Velocity.MoveToward(Vector2.Zero, Friction * (float) delta);
 
-		GD.Print(targetVelocity);
 		return targetVelocity;
 	}
 
