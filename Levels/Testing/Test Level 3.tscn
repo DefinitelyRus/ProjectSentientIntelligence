@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0elp1g1k07mk"]
+[gd_scene load_steps=10 format=3 uid="uid://d0elp1g1k07mk"]
 
 [ext_resource type="Script" path="res://Scripts/Experimental/LevelManager.cs" id="1_6jld2"]
 [ext_resource type="Script" path="res://Scripts/Miscellaneous/StaticObject.cs" id="2_rca2w"]
@@ -7,12 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://csutnbg8nwoag" path="res://Sprites/Experimental/Bonus Map.png" id="5_lvyi4"]
 [ext_resource type="PackedScene" uid="uid://bgbhteel27gkj" path="res://Prefabs/Templates/CharacterTemplate.tscn" id="6_yivh2"]
 [ext_resource type="Script" path="res://Scripts/Templates/PlayableCharacter.cs" id="7_6h2yr"]
-[ext_resource type="Script" path="res://Scripts/Templates/EnemyCharacter.cs" id="8_0v32p"]
+[ext_resource type="Script" path="res://Scripts/Miscellaneous/Camera.cs" id="9_hq4b1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_joeak"]
 size = Vector2(34, 12.5)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_d5bvb"]
 
 [node name="Game Manager" type="Node"]
 
@@ -72,29 +70,10 @@ script = ExtResource("7_6h2yr")
 ControlOverride = true
 CharacterName = "Player"
 
-[node name="Dummy Character 1" parent="Session Manager/Unit Manager" instance=ExtResource("6_yivh2")]
-position = Vector2(-150, 100)
-RotationSpeed = 200.0
-CharacterName = "Dummy"
-
-[node name="Dummy Character 2" parent="Session Manager/Unit Manager" instance=ExtResource("6_yivh2")]
-position = Vector2(-50, 100)
-script = ExtResource("8_0v32p")
-
 [node name="Camera Manager" type="Node2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="Camera Manager"]
+[node name="Camera2D" type="Camera2D" parent="Camera Manager" node_paths=PackedStringArray("Target")]
+script = ExtResource("9_hq4b1")
+Target = NodePath("../../Session Manager/Unit Manager/Playable Character")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="Camera Manager"]
-visible = false
-collision_layer = 0
-collision_mask = 0
-gravity_scale = 0.0
-
-[node name="Collider" type="CollisionShape2D" parent="Camera Manager/RigidBody2D"]
-editor_description = "This collider isn't actually needed for our purposes, but Godot requires it for all PhysicsBody objects.
-
-Using a RigidBody may be outright unnecessary if the Camera itself already supports movement moothing and shake physics."
-visible = false
-shape = SubResource("CircleShape2D_d5bvb")
-disabled = true
+[node name="Camera Target" type="Node2D" parent="Camera Manager"]

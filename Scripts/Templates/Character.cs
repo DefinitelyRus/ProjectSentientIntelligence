@@ -35,7 +35,7 @@ public partial class Character : CharacterBody2D
 	///		Controls where the character should be facing.
 	///		<br/><br/>
 	///		If you intend to change where the character is facing,
-	///		please consider using <see cref="FaceTowards(float, double, float)"/> instead.
+	///		please consider using <see cref="RotateTo(float, double, float)"/> instead.
 	///		<br/>
 	///		Use this if a direction-reliant action needs to be performed, like sprite changes.
 	///		<br/><br/>
@@ -50,21 +50,21 @@ public partial class Character : CharacterBody2D
 	///		The angle at which the character is facing.
 	///		<br/><br/>
 	///		If you intend to change where the character is facing,
-	///		please consider using <see cref="FaceTowards(float, double, float)"/> instead.
+	///		please consider using <see cref="RotateTo(float, double, float)"/> instead.
 	///		<br/>
 	///		Use this if an angle-reliant action needs to be performed,
 	///		like aiming weapons or moving.
 	///		<br/><br/>
-	///		This is used to control the vector at which the character is moving
-	///		and direction the character should be facing (<see cref="FaceDirection"/>).
+	///		This is used to control the vector at which the character is moving and to
+	///		determine which direction the character should be facing (<see cref="FaceDirection"/>).
 	/// </summary>
 	public float FaceAngle { get; set; }
 
 	/// <summary>
-	///		Faces the character towards the specified angle.
+	///		Instantly faces the character towards the specified angle.
 	///		<br/><br/>
 	///		Only use this if an instant change in direction is needed.
-	///		Otherwise, use <see cref="FaceTowards(float, double, float)"/>
+	///		Otherwise, use <see cref="RotateTo(float, double, float)"/>
 	///		for a smooth transition.
 	///		<br/><br/>
 	///		May be overridden in subclasses to add more or reduce directions,
@@ -76,14 +76,14 @@ public partial class Character : CharacterBody2D
 	///		The angle at which the character will approximately face towards relative to the +y axis.
 	///	</param>
 	//TODO: make this take radians instead of degrees
-	public virtual void UpdateFaceDirection(float eulerAngle) {
+	public virtual void UpdateDirectionNow(float eulerAngle) {
 		eulerAngle = Mathf.PosMod(eulerAngle, 360f);
-		ulong directionCount = (ulong)Enum.GetNames(typeof(CardinalDirection)).Length; // funny
+		ulong directionCount = (ulong) Enum.GetNames(typeof(CardinalDirection)).Length; // funny
 
 		float currentAngle = 360f / directionCount / 2;
 		for (uint i = 0; i < directionCount; i++) {
 			if (eulerAngle < currentAngle) {
-			 	FaceDirection = (CardinalDirection)i;
+			 	FaceDirection = (CardinalDirection) i;
 				break;
 			}
 			currentAngle += 360f / directionCount;
@@ -113,7 +113,7 @@ public partial class Character : CharacterBody2D
 	///		<br/><br/>
 	///		This is applied as a multiplier to frameDelta.
 	///	</param>
-	public void FaceTowards(float targetAngle, double frameDelta, float rotationSpeed = 1) {
+	public void RotateTo(float targetAngle, double frameDelta, float rotationSpeed = 1) {
 		//TODO: If rotation is 0, the rotationSpeed should be equal to RotationSpeed.
 		//TODO: Update the documentation to reflect the above change.
 		//TODO: Update the overload to do the same.
@@ -180,9 +180,9 @@ public partial class Character : CharacterBody2D
 	///		<br/><br/>
 	///		This is applied as a multiplier to frameDelta.
 	///	</param>
-	public void FaceTowards(Vector2 targetPosition, double frameDelta, float rotationSpeed = 1) {
+	public void RotateTo(Vector2 targetPosition, double frameDelta, float rotationSpeed = 1) {
 		var pos = Mathf.PosMod(Mathf.RadToDeg(GlobalPosition.AngleToPoint(targetPosition)) + 90, 360);
-		FaceTowards(pos, frameDelta, rotationSpeed);
+		RotateTo(pos, frameDelta, rotationSpeed);
 	}
 
 	#endregion
@@ -366,7 +366,7 @@ public partial class Character : CharacterBody2D
 		Vector2 direction = (position - GlobalPosition);
 
 		// make character face towards target
-		UpdateFaceDirection(Mathf.RadToDeg(-direction.AngleTo(Vector2.Up)));
+		UpdateDirectionNow(Mathf.RadToDeg(-direction.AngleTo(Vector2.Up)));
 
 		// if within deadzone...
 		if (direction.Length() <= MovementDeadzone)
@@ -378,7 +378,7 @@ public partial class Character : CharacterBody2D
 			MoveShortHaulTo(position, delta); // PLACEHOLDER
 		}
 
-		// TODO: add collision check
+		// TODO: Add collision check
 
 		Vector2 targetVelocity = Vector2.Zero;
 		// Accelerate to the target speed if the MoveDirection is non-zero.
@@ -388,8 +388,11 @@ public partial class Character : CharacterBody2D
 		// Otherwise, slow down to a halt.
 		else targetVelocity = Velocity.MoveToward(Vector2.Zero, Friction * (float) delta);
 
-		GD.Print(targetVelocity);
+		//GD.Print(targetVelocity);
 		return targetVelocity;
+
+		//TODO: Fix strange movements. It seems erratic and unsmooth; not sure why.
+		//TODO: The character should only move on click and stop after reaching the target.
 	}
 
 	Vector2 MoveShortHaulTo(Vector2 position, double delta) {
@@ -458,6 +461,7 @@ public partial class Character : CharacterBody2D
 				continue;
 			}
 
+			//NOTE: This is temporary. In a future version, characters will have various priority targets.
 			//If the current character is closer, assign it as the best candidate.
 			else if (bestCandidate.GlobalPosition.DistanceTo(GlobalPosition) > character.GlobalPosition.DistanceTo(GlobalPosition)) {
 				bestCandidate = character;
@@ -470,6 +474,8 @@ public partial class Character : CharacterBody2D
 	}
 
 	#endregion
+
+	#region Combat
 
 	//TODO: Create a class to pass as an argument to this function.
 	//It should contain the character stat data that will be affected.
@@ -493,6 +499,41 @@ public partial class Character : CharacterBody2D
 
 		QueueFree();
 	}
+
+
+	#endregion
+
+	#region Sprites and Animations
+
+	/// <summary>
+	///		Updates the sprite's Z-index to match the collider's base Y position.
+	///		<br/><br/>
+	///		The Z-index is clamped to +-4096. <br/>
+	///		For every 8 Y units, the Z-index is increased/decreased by 1. <br/>
+	///		This method should only be called in the <see cref="_Process(double)"/> function.
+	/// </summary>
+	/// <param name="debug">Whether or not to print related text.</param>
+	private void UpdateSpriteIndex(bool debug = false) {
+
+		//The collider's Y position.
+		int colliderPosY = (int) Collider.GlobalPosition.Y;
+
+		//Points to the bottom edge of the collider.
+		int shapeHalfHeight = (int) (Collider.Shape as RectangleShape2D).Size.Y / 2;
+
+		//Offset then divide by 8 to extend vertical range of the level.
+		//This is so the Z-index is based on the bottom edge of the collider.
+		int zIndex = (colliderPosY + shapeHalfHeight) / 4;
+
+		//Updates the sprite's Z-index and clamps it to +-4096.
+		Sprite.ZIndex = Mathf.Clamp(zIndex, -4096, 4096);
+
+		if (debug) GD.Print($"[Character | {Name}] Y: {colliderPosY + shapeHalfHeight}    Index: {Sprite.ZIndex}");
+
+		if (Mathf.Abs(zIndex) > 4096) GD.PrintErr($"[Character | {Name}] Z-index is out of bounds: {zIndex} (Range: -4096 to 4096)");
+	}
+
+	#endregion
 
 	#region Godot
 
@@ -528,17 +569,16 @@ public partial class Character : CharacterBody2D
 		}
 
 		//Allows the character to always face the cursor.
-		if (RotateTowardsMouse) FaceTowards(GetGlobalMousePosition(), delta, RotationSpeed);
+		if (RotateTowardsMouse) RotateTo(GetGlobalMousePosition(), delta, RotationSpeed);
 
 		#endregion
 
 		#region Sprite Z-index update
 
 		//TODO: PSI-26 Update Z-index Calculation
-
-		//The sprite's Z-index will be updated to match the collider's base Y position.
-		//This is clamped by Godot's Z-index minimum and maximum values (4096 on both ends).
 		Sprite.ZIndex = Mathf.Clamp((int) Collider.GlobalPosition.Y + (int) (Collider.Shape as RectangleShape2D).Size.Y / 2, -4096, 4096);
+
+		UpdateSpriteIndex(true);
 
 		#endregion
 	}
