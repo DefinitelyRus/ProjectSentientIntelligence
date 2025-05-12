@@ -1,5 +1,4 @@
 using Godot;
-using System.Diagnostics;
 
 public partial class StaticObject : StaticBody2D {
 	/// <summary>

@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://d7fqyrxhfx1"]
+
+[ext_resource type="Script" path="res://_NEW/Prefabs/Character (Template)/NewCharacter.cs" id="1_svym8"]
+[ext_resource type="Texture2D" uid="uid://v8xcwmdgfq2d" path="res://Sprites/Experimental/Idle.png" id="2_lpvd0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s5ptn"]
+radius = 5.0
+height = 22.0
+
+[node name="Game Manager" type="Node"]
+editor_description = "Manages all the game-wide systems and components that persists between sessions and even between game launches."
+
+[node name="Session Manager" type="Node" parent="."]
+editor_description = "Manages all the systems and components that persist between levels."
+
+[node name="Level Manager" type="Node" parent="Session Manager"]
+editor_description = "Manages all the systems and components that persist throughout a single level."
+
+[node name="Arena" type="Node" parent="Session Manager/Level Manager"]
+editor_description = "i.e.: Level, Floor, World
+Contains all the environment nodes, including but not limited to:
+- Walls
+- Floor Tiles (Decorative)
+- Obstacles
+- Decorations
+- Effect Generators
+- Panels (Interactive)
+- Portals"
+
+[node name="Region" type="Node2D" parent="Session Manager/Level Manager/Arena"]
+editor_description = "i.e.: Area, Room, Segment, Chunk
+A smaller area consisting of one NavigationRegion2D node."
+
+[node name="Cast" type="Node" parent="Session Manager/Level Manager"]
+editor_description = "i.e.: Characters
+Contains all the characters present in the current Arena."
+
+[node name="Playable Cast" type="Node" parent="Session Manager/Level Manager/Cast"]
+editor_description = "i.e.: Playable Characters
+Contains all the characters directly controlled by the player."
+
+[node name="NPCs" type="Node" parent="Session Manager/Level Manager/Cast"]
+editor_description = "i.e.: Bots, Non-playable Characters
+Contains all the characters with their own behaviors and logic."
+
+[node name="Character" type="CharacterBody2D" parent="Session Manager/Level Manager/Cast"]
+motion_mode = 1
+script = ExtResource("1_svym8")
+TargetSpeed = 100.0
+Acceleration = 0.1
+Deceleration = 0.3
+SpeedPenaltyOnDestinationReset = 0.0
+DestinationReachedDistance = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Session Manager/Level Manager/Cast/Character"]
+shape = SubResource("CapsuleShape2D_s5ptn")
+one_way_collision_margin = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Session Manager/Level Manager/Cast/Character"]
+texture = ExtResource("2_lpvd0")
+region_enabled = true
+region_rect = Rect2(19, 20, 12, 23)
+
+[node name="Camera2D" type="Camera2D" parent="Session Manager"]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
